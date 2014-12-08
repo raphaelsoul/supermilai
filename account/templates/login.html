@@ -1,0 +1,33 @@
+{% extends "base_account.html" %}
+{% block page_title %}Login{% endblock %}
+        {% block form %}
+             <h1>登录</h1>
+            <form class="form-horizontal" action="" method="post">
+                <div class="control-group">
+                     <label class="control-label" for="inputAccount">账户:</label>
+                    <div class="controls">
+                        <input id="inputAccount" class="form-control" type="text" placeholder="Please input account" name="account"/>
+                    </div>
+                </div>
+                <div class="control-group">
+                     <label class="control-label" for="inputPassword">密码:</label>
+                    <div class="controls">
+                        <input id="inputPassword" class="form-control" type="password" placeholder="Please input password" name="password"/>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                        <br>
+                        <p style="width:100%;text-align:center;">
+                            <button type="submit" class="btn btn-primary">登录</button>
+                            <a class="btn btn-warning" href="/account/register.html">注册</a>
+                        </p>
+                    </div>
+                </div>
+                <div class="control-group">
+                {% if errors %}
+                        <div class="alert alert-danger">{% for error in errors %} {{error}}! {% endfor %}</div>
+                {% endif %}
+                </div>
+            </form>
+        {% endblock %}

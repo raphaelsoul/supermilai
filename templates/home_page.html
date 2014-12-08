@@ -1,0 +1,21 @@
+{% extends "base_proj.html" %}
+
+{% block page_title %}首页{% endblock %}
+
+{% block content_title %}首页{% endblock %}
+
+{% block page_level_styles %}
+{% endblock %}
+
+{% block main_content %}
+{% for group in request.user.groups.all %}
+	{% for perm in group.permissions.all%}
+	{{perm}}<br>
+	{%endfor%}
+{% endfor %}
+<br>
+{{request.user.permissions.all}}
+{% endblock %}
+
+{% block page_level_scripts %}
+{% endblock %}

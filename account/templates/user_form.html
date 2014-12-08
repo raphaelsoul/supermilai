@@ -1,0 +1,90 @@
+{% extends "base_proj.html" %}
+
+{% block page_title %}帐号资料{% endblock %}
+
+{% block page_level_styles %}
+{% endblock %}
+
+{% block content_title %}帐号资料{% endblock %}
+
+{% block main_content %}
+<div class="row">
+	<div class="col-md-2"></div>
+	<div class="col-md-8">
+		<form action="/account/manage/modify/user/id={{user.pk}}" class="form-horizontal" method="post" role="form">
+			<div class="form-group">
+				<label for="username" class="control-label col-sm-2">帐户名</label>
+				<div class="col-sm-6">
+					<input id="username" type="text" value="{{user.username}}" name="username" class="form-control col-sm-6" maxlength="30" disabled>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="username" class="control-label col-sm-2">姓名</label>
+				<div class="col-sm-6">
+					<input name="truename" id="truename" type="text" value="{{user.truename}}" class="col-sm-6 form-control" maxlength="20">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="email" class="control-label col-sm-2">Email</label>
+				<div class="col-sm-6">
+					<input id="email" name="email" type="text" value="{{user.email}}" class="col-sm-6 form-control">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="qq" class="control-label col-sm-2">QQ</label>
+				<div class="col-sm-6">
+					<input type="text" name="qq" value="{{user.qq}}" class="form-control" maxlength="20">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="group" class="control-label col-sm-2">角色</label>
+				<div class="col-sm-6">
+					<fieldset disabled>
+					{%for group in groups%}
+      					{%if group in user.groups.all%}<input type="checkbox" checked="checked">{{group}}{%else%}<input type="checkbox">{{group}}{%endif%}
+					{%endfor%}
+					</fieldset>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="is_active" class="control-label col-sm-2">可用</label>
+				<div class="col-sm-6">
+				<fieldset disabled>
+					<select class="form-control" name="" id="is_active">
+					{%if user.is_active == True%}
+						<option selected="selected">是</option>
+						<option value="">否</option>
+					{%else%}
+						<option>是</option>
+						<option  selected="selected">否</option>
+					{%endif%}
+					</select>
+				</fieldset>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="qq" class="control-label col-sm-2">加入时间</label>
+				<div class="col-sm-6">
+					<p class="form-control-static">{{user.date_joined|date:"Y-m-d H:i:s T"}}</p>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="qq" class="control-label col-sm-2">上次登录</label>
+				<div class="col-sm-6">
+					<p class="form-control-static">{{user.last_login|date:"Y-m-d H:i:s T"}}</p>
+				</div>
+			</div>
+			<div class="button-group">
+				<div class="col-sm-4"></div>
+				<div class="col-sm-8">
+					<button type="submit" class="btn btn-primary">提交</button>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="col-md-2"></div>
+</div>
+{% endblock %}
+
+{% block page_level_scripts %}
+{% endblock %}

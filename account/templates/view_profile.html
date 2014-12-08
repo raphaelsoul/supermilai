@@ -1,0 +1,86 @@
+{% extends "base_proj.html" %}
+
+{% block page_title %}帐号资料{% endblock %}
+
+{% block page_level_styles %}
+{% endblock %}
+
+{% block content_title %}帐号资料{% endblock %}
+
+{% block main_content %}
+<div class="row">
+	<div class="col-md-2"></div>
+	<div class="col-md-8">
+		<form action="#" class="form-horizontal" role="form">
+		<fieldset disabled>
+			<div class="form-group">
+				<label for="username" class="control-label col-sm-2">帐户名</label>
+				<div class="col-sm-6">
+					<input id="username" type="text" value="{{user.username}}" class="form-control col-sm-6">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="username" class="control-label col-sm-2">姓名</label>
+				<div class="col-sm-6">
+					<input id="truename" type="text" value="{{user.truename}}" class="col-sm-6 form-control">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="email" class="control-label col-sm-2">Email</label>
+				<div class="col-sm-6">
+					<input id="email" type="text" value="{{user.email}}" class="col-sm-6 form-control">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="qq" class="control-label col-sm-2">QQ</label>
+				<div class="col-sm-6">
+					<input type="text" value="{{user.qq}}" class="form-control">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="group" class="control-label col-sm-2">角色</label>
+				<div class="col-sm-6">
+					{%for group in user.groups.all%}
+      					<input type="checkbox" checked="checked">{{group}}
+					{%endfor%}
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="is_active" class="control-label col-sm-2">可用</label>
+				<div class="col-sm-6">
+					<select class="form-control" name="" id="is_active">
+					{%if user.is_active == True%}
+						<option selected="selected">是</option>
+						<option value="">否</option>
+					{%else%}
+						<option>是</option>
+						<option  selected="selected">否</option>
+					{%endif%}
+					</select>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="qq" class="control-label col-sm-2">加入时间</label>
+				<div class="col-sm-6">
+					<input type="text" value="{{user.date_joined|date:"Y-m-d H:i:s T"}}" class="form-control">
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="qq" class="control-label col-sm-2">上次登录</label>
+				<div class="col-sm-6">
+					<input type="text" value="{{user.last_login|date:"Y-m-d H:i:s T"}}" class="form-control">
+				</div>
+			</div>
+		</fieldset>
+			<div class="button-group">
+				<div class="col-sm-2"></div>
+				<div class="col-sm-6"><p style="text-align: center;"><a href="/account/profile/edit/id={{user.pk}}" class="btn btn-warning btn-sm">编辑</a></p></div>
+			</div>
+		</form>
+	</div>
+	<div class="col-md-2"></div>
+</div>
+{% endblock %}
+
+{% block page_level_scripts %}
+{% endblock %}

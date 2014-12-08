@@ -1,0 +1,172 @@
+{% extends "base_proj.html" %}
+
+{% block page_title %}用户列表{% endblock %}
+
+{% block content_title %}用户列表{% endblock %}
+
+{% block page_level_styles %}
+{% endblock %}
+
+{% block main_content %}
+<div class="row">
+	<div class="col-sm-12">
+		<table class="table table-hover">
+			<div class="pull-left">
+				<a href="/account/manage/add_user.html" class="btn btn-success btn-sm"> <i class="glyphicon glyphicon-user"></i> 增加用户</a>
+			</div>
+			<div class="table-container">
+			<thead>
+		<tr>
+			<th></th>
+			<th>用户名</th>
+			<th>姓名</th>
+			<th>权限组</th>
+			<th>可用/在职/超级用户</th>
+			<th>Email</th>
+			<th>上次登录</th>
+			<th>操作</th>
+		</tr>
+			</thead>
+			<tbody>
+		{% for user in users%}
+		<tr class="{% if user.is_active != True %}danger{%else%}active{%endif%}">
+			<td><input type="checkbox" value="{{user.pk}}"></td>
+			<td>{{user.username}}</td>
+			<td>{{user.truename}}</td>
+			<td>{%for group in user.groups.all%}{{group}}{%endfor%}</td>
+			<td>
+				<span class="label label-{{user.is_active|yesno:"success,warning,danger"}}">{{user.is_active|yesno:"是,否,空"}}</span>
+				<span class="label label-{{user.is_staff|yesno:"success,warning,danger"}}">{{user.is_staff|yesno:"是,否,空"}}</span>
+				<span class="label label-{{user.is_superuser|yesno:"success,warning,danger"}}">{{user.is_superuser|yesno:"是,否,空"}}</span>
+			</td>
+			<td>{{user.email}}</td>
+			<td>{{user.last_login|date:"Y-m-d H:i:s T"}}</td>
+			<td>
+				{%if user.is_active == True%}
+				<button id="stop-btn" class="btn btn-sm btn-danger" value="{{user.pk}}">停用</button>
+				{%elif user.is_active == False%}
+				<button id="activate-btn" class="btn btn-sm btn-primary" value="{{user.pk}}">启用</button>
+				{%endif%}
+				<a href="/account/manage/modify/user/id={{user.pk}}" class="btn btn-sm btn-warning" value="{{user.pk}}">编辑</a>
+				<button class="btn btn-sm btn-info" value="{{user.pk}}" data-toggle="modal" data-target="#group-set-modal-{{user.pk}}">设置权组</button>
+				<a href="/account/manage/remove/user/id={{user.pk}}" class="btn btn-sm btn-danger" id="user-del">删除</a>
+			</td>
+		</tr>
+		<div class="modal fade" id="group-set-modal-{{user.pk}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<form action="#" id="232">
+						<div class="modal-header">
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+							<h4 class="modal-title" id="myModalLabel">为{{user.truename}}设置权限组</h4>
+						</div>
+						<div class="modal-body">
+							<div class="row">
+								<div class="col-md-2">
+									<label for="span-{{user.pk}}" class="control-label">现属权组</label>
+								</div>
+								<div class="col-md-6">
+									<span id="span-{{user.pk}}">{% for cgroup in user.groups.all %}{{cgroup}}{%endfor%}</span>
+								</div>
+								<div class="col-md-4"></div>
+							</div>
+							<div class="row">
+								<div class="col-md-2">
+									<label for="group-to-choose-{{user.pk}}" class="control-label">权组</label>
+								</div>
+								<div class="col-md-6" id="select-container">
+									<select name="group-to-choose" id="group-to-choose-{{user.pk}}" class="form-control">
+										{% for group in groups %}
+										<option value="{{group.pk}}" {% for ugroup in user.groups.all %}{% if ugroup == group %}selected="selected"{% endif %}{% endfor %}>{{group}}</option>
+										{% endfor %}
+									</select>
+								</div>
+								<div class="col-md-4"></div>
+							</div>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+							<button type="button" class="btn btn-primary" value="{{user.pk}}" id="set-group">提交更改</button>
+						</div>
+					</form>
+				</div>
+			</div>
+		</div>
+		{% endfor %}
+			</tbody>
+			</div>
+		</table>
+	</div>
+</div>
+<div id="cover" class="cover">
+	<img class="stay-center" src="/static/img/loading.gif" style="margin:0 auto;">
+</div>
+{% endblock %}
+
+{% block page_level_plugins %}
+	<script src="/static/plugins/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+	<script src="http://cdn.bootcss.com/bootstrap-select/1.6.3/js/i18n/defaults-zh_CN.min.js"></script>
+{% endblock %}
+
+{% block page_level_scripts %}
+<script type="text/javascript">
+/*confirm to block a user active and staff*/
+$("button[id='stop-btn']").each(function (index) {
+	$(this).click(function(){
+		var value = $(this).attr('value');
+		if (confirm("是否确认停用")){
+		 	showMask();
+		 	$.post(
+		 		"/account/ajax/set_active_status.html",
+		 		{'db_id':value},
+		 		function(data){ if (data != 'permissiondenied') {
+		 			alert('刷新页面中');
+		 			window.location.reload();
+		 		} else { alert('没有权限!'); hideMask(); }
+		 		});
+		 } else {};
+	});
+});
+/*confirm to set a user active and staff*/
+$("button[id='activate-btn']").each(function (index) {
+	$(this).click(function(){
+		var value = $(this).attr('value');
+		if (confirm("是否确认启用")){
+		 	showMask();
+		 	$.post(
+		 		"/account/ajax/set_active_status.html",
+		 		{'db_id':value},
+		 		function(data){ if (data != 'permissiondenied') {
+		 			alert('刷新页面中');
+					window.location.reload();
+		 		} else { alert('没有权限!'); hideMask(); }
+		 		});
+		 } else {};
+	});
+});
+/* confirm to delete a user*/
+$("a[id='user-del']").each(function (index) {
+	$(this).click(function(){
+		if (confirm("是否确认删除?")){
+			return true
+		 } else { return false };
+	});
+});
+/*post via ajax to set group of a user*/
+$("button[id='set-group']").each(function (index) {
+	$(this).click(function(){
+		 var group_id = $(this).parent().prev().find('#select-container').children(':first').find('option:selected').val();
+		 var user_id = $(this).attr('value');
+		 $.post(
+		 	"/account/ajax/set_group.html",
+		 	{'group_id':group_id,'user_id':user_id},
+		 	function(data){
+		 		alert('刷新页面中');
+		 		window.location.reload();
+		 	}
+		 	);
+	});
+});
+</script>
+<script src="/static/js/maskcover.js"></script>
+{% endblock %}

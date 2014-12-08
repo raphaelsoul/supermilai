@@ -1,0 +1,126 @@
+{% extends "base_proj.html" %}
+
+{% block page_title %}权组列表{% endblock %}
+
+{% block content_title %}权组列表{% endblock %}
+
+{% block page_level_styles %}
+{% endblock %}
+
+{% block main_content %}
+<div id="cover" class="cover">
+	<img class="stay-center" src="/static/img/loading.gif" style="margin:0 auto;">
+</div>
+<div class="pull-left">
+	<a href="/account/manage/add_group.html" class="btn btn-sm btn-success"><i class="glyphicon glyphicon-align-justify"> </i> 增加权组</a>
+	<!--<a href="/admin/auth/group/add/" class="btn btn-sm btn-success"><i class="glyphicon glyphicon-align-justify"> </i> 增加权组</a>-->
+</div>
+{% for group in groups%}
+<div class="row">
+	<div class="col-md-12">
+		<table class="table table-hover">
+			<div class="pull-left">
+				<h4>{{group.name}}</h4>
+			</div>
+			<div class="pull-right">
+				<button class="btn btn-sm btn-info" value="{{group.pk}}" data-toggle="modal" data-target="#modal-perm-{{group.pk}}">查看权限</button>
+				<a class="btn btn-sm btn-danger" value="{{group.pk}}" href="/account/manage/remove/group/id={{group.pk}}">删除权组</a>
+			</div>
+			<thead>
+				<tr>
+					<th>成员</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for user in group.user_set.all%}
+				<tr class="active">
+					<td>{{user.truename}},</td>
+				</tr>
+				{%endfor%}
+			</tbody>
+		</table>
+	</div>
+	<div class="modal fade" id="modal-perm-{{group.pk}}" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">{{group.name}}的权限</h4>
+				</div>
+				<div class="modal-body">
+					<table class="table table-hover table-condensed">
+						<thead>
+							<tr>
+								<th>权限组名</th>
+								<th>权限名</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for perm in group.permissions.all %}
+							<tr class="active">
+								<td>{{group.name}}</td>
+								<td>{{perm}}</td>
+							</tr>
+							{%endfor%}
+						</tbody>
+					</table>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">关闭</button>
+					<!--<a href="/account/manage/modify/group/id={{group.pk}}" class="btn btn-sm btn-warning">设置权限</a>-->
+					<a href="/admin/auth/group/{{group.pk}}/" class="btn btn-sm btn-warning">设置权限</a>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+{% endfor %}
+
+
+{% endblock %}
+
+{% block page_level_plugins %}
+{% endblock %}
+
+{% block global_scripts %}
+{% endblock %}
+
+{% block page_level_scripts %}
+<script type="text/javascript">
+//$('.selectpicker').selectpicker();
+
+$("button[id='stop-btn']").each(function (index) {
+	$(this).click(function(){
+		var value = $(this).attr('value');
+		if (confirm("是否确认停用")){
+		 	showMask();
+		 	$.post(
+		 		"/account/ajax/set_active_status.html",
+		 		{'db_id':value},
+		 		function(data){
+		 			alert('刷新页面中');
+					window.location.reload();
+		 		}
+		 		);
+		 } else {};
+	});
+});
+$("button[id='activate-btn']").each(function (index) {
+	$(this).click(function(){
+		var value = $(this).attr('value');
+		if (confirm("是否确认启用")){
+		 	showMask();
+		 	$.post(
+		 		"/account/ajax/set_active_status.html",
+		 		{'db_id':value},
+		 		function(data){
+		 			alert('刷新页面中');
+					window.location.reload();
+		 		}
+		 		);
+		 } else {};
+	});
+});
+</script>
+<script src="/static/js/maskcover.js"></script>
+{% endblock %}

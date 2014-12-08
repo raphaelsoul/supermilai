@@ -1,0 +1,49 @@
+<ul class="nav-header menu-first collapsed">
+	<a href="/"> <i class="glyphicon glyphicon-dashboard"></i>
+		访问首页
+	</a>
+</ul>
+{% if perms.account.read_sidebar_url %}
+<ul class ="nav-header menu-first collapsed" href="#userMenu" data-toggle="collapse">
+	<a href="javascript:void(0);"> <i class="glyphicon glyphicon-user"></i>
+		用户管理
+	</a>
+</ul>
+<ul id="userMenu" class="nav nav-list collapse menu-second">
+	<li>
+		<a href="/account/manage/user_list.html">
+			用户列表
+		</a>
+	</li>
+	<li>
+		<a href="/account/manage/group_list.html">
+			权组列表
+		</a>
+	</li>
+	{% if request.user.is_superuser %}
+	<li>
+		<a href="/account/manage/permission_list.html">
+			权限列表
+		</a>
+	</li>
+	{%endif%}
+</ul>
+{%endif%}
+<ul class="nav-header menu-first collapsed"  href="#articleMenu" data-toggle="collapse">
+	<a href="javascript:void(0);">
+		<i class="glyphicon glyphicon-book"></i>
+		文章管理
+	</a>
+</ul>
+<ul id="articleMenu" class="nav nav-list collapse menu-second">
+	<li>
+		<a href="#">
+			添加文章
+		</a>
+	</li>
+	<li>
+		<a href="#">
+			文章列表
+		</a>
+	</li>
+</ul>

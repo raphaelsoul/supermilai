@@ -1,0 +1,52 @@
+{% extends "base_proj.html" %}
+
+{% block page_title %}权限列表{% endblock %}
+
+{% block content_title %}权限列表{% endblock %}
+
+{% block page_level_styles %}
+{% endblock %}
+
+{% block main_content %}
+<div class="row">
+	<div class="col-sm-12">
+		<table class="table table-hover table-condensed ">
+			<div class="pull-left">
+				<a href="/account/manage/add_permission.html" class="btn btn-success btn-sm"> <i class="glyphicon glyphicon-user"></i> 增加权限</a>
+			</div>
+			<div class="table-container">
+			<thead>
+		<tr>
+			<th>权限名</th>
+			<th>数据库模型</th>
+			<th>权限代码</th>
+			<th>操作</th>
+		</tr>
+			</thead>
+			<tbody>
+				{%for unique_perm in all_perms%}
+				<tr>
+					<td>{{unique_perm.name}}</td>
+					<td>{{unique_perm.content_type}}</td>
+					<td>{{unique_perm.codename}}</td>
+					<td>
+						<a href="/account/manage/modify/permission/id={{unique_perm.id}}" class="btn btn-warning btn-sm">修改</a>
+						<a href="#" class="btn btn-danger btn-sm" disabled>删除</a>
+					</td>
+				</tr>
+				{%endfor%}
+			</tbody>
+			</div>
+		</table>
+	</div>
+</div>
+<div id="cover" class="cover">
+	<img class="stay-center" src="/static/img/loading.gif" style="margin:0 auto;">
+</div>
+{% endblock %}
+
+{% block page_level_plugins %}
+{% endblock %}
+
+{% block page_level_scripts %}
+{% endblock %}
