@@ -47,15 +47,15 @@ body {
 			font-size: 14px;
 			font-family: "Helvetica Neue",Helvetica,STheiti,微软雅黑,宋体,Arial,Tahoma,sans-serif,serif;
 		}
-		/*左侧菜单*/
+		/*left*/
 		.sidebar-menu{
 			border-right: 1px solid #c4c8cb;
 		}
-		/*一级菜单*/
+		/*first*/
 		.menu-first {
 			height:40px;
 			line-height:40px;
-			background-color: #f6f6f6;
+			background-color: #66c3ec!import;
 			border-top: 1px solid #efefef !import;
 			border-bottom: 1px solid #e1e1e1 !import;
 			padding: 0 ;
@@ -65,10 +65,10 @@ body {
 			text-align: center;
 			text-decoration:none;
 		}
-		/*一级菜单鼠标划过状态*/
-		.menu-first:hover,.menu-first a:hover,.menu-first a:visited {
+		/*first hover*/
+		.menu-first:hover,.menu-first a:hover,.menu-first, .menu-first a:visited, .menu-first a:link {
 			text-decoration: none;
-			background-color: #d6d4d5;
+			background-color: #f6f6f6;
 			/*background-color: #66c3ec;*/
 			border-top: 0px solid #b7b7b7;
 			border-bottom: 0px solid #acacac;
@@ -77,7 +77,7 @@ body {
 			-moz-outline:none;
 
 		}
-		/*二级菜单*/
+		/*second*/
 		.menu-second li a{
 			/*background-color: #f6f6f6;*/
 			height:31px;
@@ -90,7 +90,7 @@ body {
 			outline:none;
 			-moz-outline:none;
 		}
-		/*二级菜单鼠标划过样式*/
+		/*second hover*/
 		.menu-second li a:hover {
 			text-decoration: none;
 			background-color: #66c3ec;
@@ -102,7 +102,7 @@ body {
 			outline:none;
 			-moz-outline:none;
 		}
-		/*二级菜单选中状态*/
+		/*second picked*/
 		.menu-second-selected {
 			background-color: #66c3ec;
 			height:31px;
@@ -116,10 +116,15 @@ body {
 			outline:none;
 			-moz-outline:none;
 		}
-		/*覆盖bootstrap的样式*/
+		/*cover bootstrap*/
 		.nav-list,.nav-list li a{
 			padding: 0px;
 			margin: 0px;
 
 		}
+
+span.mustfield-signal {
+	color: red;
+}
+
 
