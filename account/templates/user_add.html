@@ -13,25 +13,25 @@
 	<div class="col-md-8">
 		<form action="/account/manage/add_user.html" class="form-horizontal" method="post" role="form">
 			<div class="form-group">
-				<label for="username" class="control-label col-sm-2">帐户名</label>
+				<label for="username" class="control-label col-sm-2">帐户名<span class="mustfield-signal">*</span></label>
 				<div class="col-sm-6">
 					<input id="username" type="text" name="username" class="form-control col-sm-6" maxlength="30" {%if not disable%}disabled{%endif%} required>
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="password1" class="control-label col-sm-2">密码</label>
+				<label for="password1" class="control-label col-sm-2">密码<span class="mustfield-signal">*</span></label>
 				<div class="col-sm-6">
 					<input id="password1" type="password" name="password1" class="form-control col-sm-6" maxlength="30" required>
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="password2" class="control-label col-sm-2">密码（重复）</label>
+				<label for="password2" class="control-label col-sm-2">密码(重复)<span class="mustfield-signal">*</span></label>
 				<div class="col-sm-6">
 					<input id="password2" type="password" name="password2" class="form-control col-sm-6" maxlength="30" required>
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="username" class="control-label col-sm-2">姓名</label>
+				<label for="username" class="control-label col-sm-2">姓名<span class="mustfield-signal">*</span></label>
 				<div class="col-sm-6">
 					<input name="truename" id="truename" type="text" class="col-sm-6 form-control" maxlength="20" required>
 				</div>
