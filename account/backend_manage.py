@@ -96,8 +96,28 @@ def group_list(request):
 	return render_to_response('group_list.html',{'groups':groups},context_instance=RequestContext(request))#context_instance=RequestContext(request)
 
 @login_required
-def group_modify(request,id):#TODO
-	return render_to_response('group_add.html',{'groups':groups},context_instance=RequestContext(request))
+#@permission_required('auth.change_group',login_url='/403.html')
+def group_modify(request,id):
+	if request.method == 'POST':
+		group_id = request.POST.get('group_id')
+		chosen_perms =  request.POST.getlist('perms',[])
+		group_name = request.POST.get('groupname')
+		print chosen_perms,group_name,group_id
+
+		group_to_modify = Group.objects.get(pk=group_id)
+		group_to_modify.name = group_name
+		group_to_modify.permissions.clear()
+		for chosen_perm_id in chosen_perms:
+			permission_to_add = Permission.objects.get(pk=chosen_perm_id)
+			print permission_to_add
+		group_to_modify.permissions.add(permission_to_add)
+		group_to_modify.save()
+		return HttpResponseRedirect('/account/manage/group_list.html')
+
+	else:
+		group_to_modify = Group.objects.get(id=id)
+		permissions = Permission.objects.all()
+		return render_to_response('group_form.html',{'permissions':permissions,'group_to_modify':group_to_modify},context_instance=RequestContext(request))
 
 @login_required
 @permission_required('account.add_group',login_url='/403.html')
