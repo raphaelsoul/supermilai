@@ -1,0 +1,52 @@
+{% extends "base_proj.html" %}
+
+{% block page_title %}编辑权组{% endblock %}
+
+{% block content_title %}编辑权组{% endblock %}
+
+{% block page_level_styles %}
+	<link href="/static/plugins/bootstrap-select/dist/css/bootstrap-select.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block main_content %}
+<div class="row">
+	<form class="form-horizontal" role="form" action="/account/manage/modify/group/id={{group_to_modify.pk}}" method="post">
+		<div class="form-group">
+			<div class="form-group" style="display:none;" >
+				<label for="" class="col-sm-2 control-label">id</label>
+				<div class="col-sm-8"><input type="text" class="form-control" name="group_id" value="{{group_to_modify.id}}"></div>
+			</div>
+			<div class="form-group">
+				<label for="" class="col-sm-2 control-label">权限组名</label>
+				<div class="col-sm-8"><input type="text" class="form-control" name="groupname" maxlength="80" value="{{group_to_modify.name}}"></div>
+			</div>
+			<div class="form-group">
+				<label for="basic" class="col-sm-2 control-label">拥有权限</label>
+				<div class="col-sm-8">
+					{#<div><p><input type="checkbox" value="{{permission.codename}}" name="perms" checked>{{permission}}{% if permision in group_to_modify.permissions.all %}6666{% endif %}</p></div>#}
+					{#{group_to_modify.permissions.all}#}
+					<select name="perms" id="#" class="selectpicker form-control" multiple>
+						{% for permission in permissions %}
+							<option value="{{permission.pk}}" {% for gperm in group_to_modify.permissions.all %}{% if gperm.pk == permission.pk %}selected{% endif %}{% endfor %}>{{permission}}</option>
+						{% endfor %}
+					</select>
+				</div>
+			</div>
+			<div class="button-group">
+				<p style="text-align:center;"><button type="submit" class="btn btn-primary">提交</button></p>
+			</div>
+		</div>
+	</form>
+</div>
+{% endblock %}
+
+{% block page_level_plugins %}
+	<script src="/static/plugins/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
+	<script src="http://cdn.bootcss.com/bootstrap-select/1.6.3/js/i18n/defaults-zh_CN.min.js"></script>
+{% endblock %}
+
+{% block global_scripts %}
+{% endblock %}
+
+{% block page_level_scripts %}
+{% endblock %}
