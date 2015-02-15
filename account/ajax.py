@@ -1,6 +1,6 @@
 from django.http import HttpResponse,HttpResponseRedirect
 from django.contrib.auth.decorators import login_required,permission_required#,user_passes_test,
-from models import UserProfile
+from account.models import UserProfile
 from django.contrib.auth.models import Permission,Group
 #from django.core.exceptions import PermissionDenied
 #from decorators import custom_permission_required

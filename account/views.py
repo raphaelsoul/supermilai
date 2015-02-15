@@ -11,7 +11,7 @@ def account_login(request):
 	account=None
 	password=None
 	if request.method == 'POST' :
-		print request.POST['account']
+		#print request.POST['account']
 		if not request.POST.get('account'):
 			errors.append('Please Enter account')
 		else:
