@@ -6,7 +6,7 @@ A initial of auth based on django.auth module on version 1.7
 
 build-in permissions:
 
-`
+```
 ("change_other_userprofile", "Can Change others Profile"),
 
 ("stop_userprofile", "Can userprofile"),
@@ -18,7 +18,7 @@ build-in permissions:
 ("read_second_menu_group", "Can See the second menu of group"),
 
 ("read_second_menu_permission", "Can See the second menu of permission"),
-`
+```
 
 ├── account  
 │   ├── admin.py  
