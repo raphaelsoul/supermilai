@@ -55,3 +55,7 @@ target/
 
 # Django Project
 db.sqlite3
+
+#Sublime Text
+*.sublime-project
+*.sublime-workspace
