@@ -1,0 +1,177 @@
+{% extends 'base_proj.html' %}
+
+{% block page_title %}物流总览{% endblock %}
+
+{% block content_title %}物流总览{% endblock %}
+
+{% block main_content %}
+<div class="pull-right">
+	<form action="/logistik/search.html" method="post" class="navbar-form navbar-right" role="search">
+                     <div class="form-group">
+                        <input type="text" class="form-control " placeholder="Search" name="keywords">
+                     </div>
+                     <div class="form-group">
+                        <select name="target-type" class="form-control">
+                           <option value="container">装箱单编号</option>
+                           <option value="sku" selected="selected">SKU</option>
+                        </select>
+                     </div>
+                     <div class="form-group">
+                        <button type="submit" class="btn btn-default">提交</button>
+                     </div>
+                  </form>
+</div>
+<div class="row">
+	<div class="col-md-12">
+		<h3>数据汇总</h3>
+		<table class="table table-condensed table-hover table-striped">
+				<thead>
+					<tr>
+						<th>
+							SKU总数
+						</th>
+						<th>
+							装箱单总数
+						</th>
+						<th>
+							模板已制作SKU数
+						</th>
+						<th>
+							模板未制作SKU数
+						</th>
+						<th>
+							描述已制作SKU数
+						</th>
+						<th>
+							描述未制作SKU数
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							<span class="label label-info">{{skus_num}}</span>
+						</td>
+						<td>
+							<span class="label label-info">{{containers_num}}</span>
+						</td>
+						<td>
+							<span class="label label-success">{{skus_num_with_template}}</span>
+						</td>
+						<td>
+							<span class="label label-danger">{{skus_num_without_template}}</span>
+						</td>
+						<td>
+							<span class="label label-success">{{skus_num_with_description}}</span>
+						</td>
+						<td>
+							<span class="label label-danger">{{skus_num_without_description}}</span>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+	</div>
+</div>
+<div class="row">
+<div class="col-md-6">
+<h3>装箱单</h3><small><a href="/logistik/view_all_containers/page=1" class="btn btn-success btn-sm">查看全部</a></small>
+	<table class="table table-condensed table-hover table-striped">
+				<thead>
+					<tr>
+						<th>
+							装箱单编号
+						</th>
+						<th>
+							状态
+						</th>
+						<th>
+							操作
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+				{% for container in containers %}
+					<tr>
+						<td>
+							{{container.PackingListNo}}
+						</td>
+						<td>
+							{% if container.status == 'packing'%}
+								<span class="label label-danger">装箱单已出</span>
+							{% elif container.status == 'shipping'%}
+								<span class="label label-info">海运中</span>
+							{% elif container.status == 'roading'%}
+								<span class="label label-warning">公路运输中</span>
+							{% elif container.status == 'storing'%}
+								<span class="label label-success">抵达仓库</span>
+							{% endif %}
+
+						</td>
+						<td>
+							<span id="father-popover"><a href="javascript:void(0)" class="btn btn-xs btn-default" data-toggle="popover" title="Timestamps" data-content="装箱单时间：{{container.packinglist_time|date:"Y-m-d"}}出运时间：{{container.depature_time|date:"Y-m-d"}}离开目的港日期：{{container.leaving_port_time|date:"Y-m-d"}}入库日期：{{container.arrival_time|date:"Y-m-d"}}">追踪</a></span>
+							<span><a class="btn btn-primary btn-xs" href="/logistik/container/detail/id={{container.id}}">详情</a></span>
+							<span><a class="btn btn-warning btn-xs" href="/logistik/container/modify/id={{container.id}}">编辑</a></span>
+						</td>
+					</tr>
+				{% endfor %}
+				</tbody>
+			</table>
+</div>
+
+<div class="col-md-6">
+<h3>SKU</h3><a href="/logistik/view_all_items/page=1" class="btn btn-success btn-sm">查看全部</a>
+	<table class="table table-condensed table-hover table-striped">
+				<thead>
+					<tr>
+						<th>
+							SKU
+						</th>
+						<th>
+							描述状态
+						</th>
+						<th>
+							模板状态
+						</th>
+						<th>
+							装箱单号
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for sku in skus %}
+					<tr>
+						<td>
+							{{sku.sku}}
+						</td>
+						<td>
+							{% if sku.hasDescription %}
+								<span class="label label-success">已制作</span>
+							{% else %}
+								<span class="label label-danger">未制作</span>
+							{% endif %}
+						</td>
+						<td>
+							{% if sku.hasTemp %}
+								<span class="label label-success">已制作</span>
+							{% else %}
+								<span class="label label-danger">未制作</span>
+							{% endif %}
+						</td>
+						<td>
+							<a href="/logistik/container/detail/id={{sku.container.id}}">{{sku.container.PackingListNo}}</a>
+						</td>
+					</tr>
+				{% endfor %}
+				</tbody>
+			</table>
+</div>
+</div>
+{% endblock %}
+
+{% block page_level_scripts %}
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#father-popover a").popover({placement : 'top',animation: 'true'});
+});
+</script>
+{% endblock %}

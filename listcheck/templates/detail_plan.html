@@ -1,0 +1,85 @@
+{% extends 'base_proj.html' %}
+
+{% block page_title %}查看上架计划{% endblock %}
+
+{% block content_title %}查看上架计划{% endblock %}
+
+{% block main_content %}
+<form action="#" method="post" class="form-horizontal">
+	<div class="row-fluid">
+		<div class="row" class="form-group">
+			<div class="col-md-3">上架帐号： {{plan.planed_account}}</div>
+			<div class="col-md-3">申请人： {{plan.poster}}</div>
+			<div class="col-md-3">申请时间： {{ plan.uploadtime|date:"Y-m-d H:i:s T" }}</div>
+			<div class="col-md-3">审核结果：
+				{%if plan.check_result == "true" %}
+				<a class="btn btn-success btn-sm" disabled>已通过</a> <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#notemodal">查看备注</button>
+				{%elif plan.check_result == "false" %}
+				<a class="btn btn-danger btn-sm" disabled>未通过</a> <button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#notemodal">查看备注</button>
+				{%endif%}
+			</div>
+		</div>
+	</div>
+	<div class="row-fluid">
+		<div class="row" class="form-group">
+			<table class="table table-hover">
+				<thead>
+					<th style="width:10%">SKU</th>
+					<th style="width:10%">关键词</th>
+					<th style="width:10%">原价</th>
+					<th style="width:10%">计划价格</th>
+					<th style="width:20%">参考卖家1</th>
+					<th style="width:20%">参考卖家2</th>
+					<th style="width:20%">参考卖家3</th>
+				</thead>
+				<tbody id="sku-tbody">
+				{%for content in plan.listplan_set.all %}
+					<tr>
+						<td>
+							{{content.list_sku}}</td>
+						<td>
+							{{content.meta_keyword}}</td>
+						<td>
+							{{content.former_price}}</td>
+						<td>
+							{{content.planed_price}}</td>
+						<td>
+							<a href="{{content.best_seller_list1}}">点击查看</a><br>
+							{{content.seller_price1}}</td>
+						<td>
+							<a href="{{content.best_seller_list2}}">点击查看</a><br>
+							{{content.seller_price2}}</td>
+						<td>
+							<a href="{{content.best_seller_list3}}">点击查看</a><br>
+							{{content.seller_price3}}</td>
+					</tr>
+				{%endfor%}
+				</tbody>
+			</table>
+		</div>
+		<div class="row" class="form-group">
+			<div class="col-md-4"></div>
+			<div class="col-md-4"></div>
+			<div class="col-md-4"></div>
+		</div>
+	</div>
+</form>
+<div class="row">
+	<!-- 模态框（Modal） -->
+	<div class="modal fade" id="notemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="myModalLabel">审核备注</h4>
+				</div>
+				<div class="modal-body">{{plan.note}}</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+				</div>
+			</div>
+			<!-- /.modal-content -->
+		</div>
+		<!-- /.modal -->
+	</div>
+</div>{% endblock %}

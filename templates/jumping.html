@@ -1,0 +1,14 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="zh-cn">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+	<title>页面跳转中...</title>
+	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+	<script language=javascript>setTimeout('window.location="{{ redirecturls }}"',2000)</script>
+</head>
+<body>
+	<h1>页面将会在2秒后跳转，请勿操作，谢谢!</h1>
+	<h3>服务器返回的操作结果是:</h3>
+	<h2>{{ report }}</h2>
+</body>
+</html>

@@ -1,0 +1,75 @@
+{% extends 'base_proj.html' %}
+
+{% block page_title %}浏览所有装箱单{% endblock %}
+
+{% block content_title %}浏览所有装箱单{% endblock %}
+
+{% block main_content %}
+<div class="row">
+	<table class="table table-hover">
+		<thead>
+			<th>装箱单编号</th>
+			<th>状态</th>
+			<th>装箱时间</th>
+			<th>出运时间</th>
+			<th>离开目的港时间</th>
+			<th>入库时间</th>
+			<th>操作</th>
+		</thead>
+		<tbody>
+			{%for container in containers%}
+			<tr>
+				<td>{{container.PackingListNo}}</td>
+				<td>
+						{% if container.status == 'packing'%}
+							<span class="label label-danger">装箱单已出</span>
+						{% elif container.status == 'shipping'%}
+							<span class="label label-info">海运中</span>
+						{% elif container.status == 'roading'%}
+							<span class="label label-warning">公路运输中</span>
+						{% elif container.status == 'storing'%}
+							<span class="label label-success">抵达仓库</span>
+						{% endif %}
+				</td>
+				<td>{{container.packinglist_time|date:"Y-m-d"}}</td>
+				<td>{{container.depature_time|date:"Y-m-d"}}</td>
+				<td>{{container.leaving_port_time|date:"Y-m-d"}}</td>
+				<td>{{container.arrival_time|date:"Y-m-d"}}</td>
+				<td>
+					<span id="father-popover"><a href="javascript:void(0)" class="btn btn-xs btn-default" data-toggle="popover" title="Timestamps" data-content="装箱单时间{{container.packinglist_time|date:"Y-m-d"}}出运时间{{container.depature_time|date:"Y-m-d"}}到港日期{{container.leaving_port_time|date:"Y-m-d"}}入库日期{{container.arrival_time|date:"Y-m-d"}}">追踪</a></span>
+					<span><a class="btn btn-primary btn-xs" href="/logistik/container/detail/id={{container.id}}">详情</a></span>
+					<span><a class="btn btn-warning btn-xs" href="/logistik/container/modify/id={{container.id}}">编辑</a></span></td>
+			</tr>
+			{%endfor%}
+		</tbody>
+	</table>
+</div>
+<div class="row">
+	<div style="width:100%;text-align:center;">
+		<ul class="pagination">
+			{% if containers.has_previous %}
+			<li><a class='paginator' title='上一页' href='page={{ containers.previous_page_number }}'><span>&lt;&lt;</span></a>
+			</li>
+			{% endif %}
+			{% for page in containers.paginator.page_range %}
+				{% if page == containers.number %}
+				<li><a  class="active" href="javascript:void(0);">{{ page }}</a></li>
+				{% else %}
+				<li><a href="page={{ page }}">{{ page }}</a></li>
+				{% endif %}
+			{% endfor %}
+			{% if containers.has_next %}
+			<li><a href="page={{ containers.next_page_number }}">&raquo;</a></li>
+			{% endif %}
+		</ul>
+	</div>
+</div>
+{% endblock %}
+
+{% block page_level_scripts %}
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#father-popover a").popover({placement : 'top'});
+});
+</script>
+{% endblock %}

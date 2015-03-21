@@ -24,6 +24,7 @@
 			</div>
 			<div class="pull-right">
 				<button class="btn btn-sm btn-info" value="{{group.pk}}" data-toggle="modal" data-target="#modal-perm-{{group.pk}}">查看权限</button>
+				<a class="btn btn-sm btn-warning" value="{{group.pk}}" href="/account/manage/modify/group/id={{group.pk}}">修改权组</a>
 				<a class="btn btn-sm btn-danger" value="{{group.pk}}" href="/account/manage/remove/group/id={{group.pk}}">删除权组</a>
 			</div>
 			<thead>
@@ -67,8 +68,8 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">关闭</button>
+					<!--<a href="/account/manage/modify/group/id={{group.pk}}" class="btn btn-sm btn-warning">设置权限</a>-->
 					<a href="/account/manage/modify/group/id={{group.pk}}" class="btn btn-sm btn-warning">设置权限</a>
-					<!--<a href="/admin/auth/group/{{group.pk}}/" class="btn btn-sm btn-warning">设置权限</a>-->
 				</div>
 			</div>
 		</div>

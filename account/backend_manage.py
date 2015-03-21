@@ -4,11 +4,12 @@ from django.http import HttpResponse,HttpResponseRedirect
 from django.contrib.auth.decorators import login_required,permission_required#,user_passes_test,permission_required
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.views import password_change
-from account.models import UserProfile
+from models import UserProfile
 from django.template import RequestContext
 from django.contrib.contenttypes.models import ContentType
 
 @login_required
+#@permission_required('auth.add_permission',login_url='/403.html')
 def user_list(request):
 	users = UserProfile.objects.all()
 	groups = Group.objects.all()
@@ -21,6 +22,7 @@ def user_list(request):
 @login_required
 @permission_required('account.change_userprofile',login_url='/403.html')
 def user_modify(request,id):
+
 	user_to_modify = UserProfile.objects.get(pk=id)
 	if request.method == 'POST':
 		truename = request.POST['truename']
@@ -31,7 +33,10 @@ def user_modify(request,id):
 		user_to_modify.email = email
 		user_to_modify.qq = qq
 		user_to_modify.save()
-		return HttpResponseRedirect('/account/manage/user_list.html')
+		if not request.user.has_perm('account.change_other_userprofile'):
+			return HttpResponseRedirect('/')
+		else:
+			return HttpResponseRedirect('/account/manage/user_list.html')
 	else:
 		if request.user == user_to_modify:
 			user = user_to_modify
@@ -57,7 +62,7 @@ def user_add(request):
 		qq = request.POST['qq']
 		password1 = request.POST['password1']
 		password2 = request.POST['password2']
-		#print truename,email,qq,password1,password2
+		print truename,email,qq,password1,password2
 		if request.POST['is_active'] == 'true':
 			is_active = True
 		elif request.POST['is_active'] == 'false':
@@ -96,20 +101,20 @@ def group_list(request):
 	return render_to_response('group_list.html',{'groups':groups},context_instance=RequestContext(request))#context_instance=RequestContext(request)
 
 @login_required
-#@permission_required('auth.change_group',login_url='/403.html')
+@permission_required('auth.change_group',login_url='/403.html')
 def group_modify(request,id):
 	if request.method == 'POST':
 		group_id = request.POST.get('group_id')
 		chosen_perms =  request.POST.getlist('perms',[])
 		group_name = request.POST.get('groupname')
-		#print chosen_perms,group_name,group_id
+		print chosen_perms,group_name,group_id
 
 		group_to_modify = Group.objects.get(pk=group_id)
 		group_to_modify.name = group_name
 		group_to_modify.permissions.clear()
 		for chosen_perm_id in chosen_perms:
 			permission_to_add = Permission.objects.get(pk=chosen_perm_id)
-			#print permission_to_add
+			print permission_to_add
 		group_to_modify.permissions.add(permission_to_add)
 		group_to_modify.save()
 		return HttpResponseRedirect('/account/manage/group_list.html')
@@ -151,7 +156,7 @@ def permission_list(request):
 	return render_to_response('perm_list.html',{'all_perms':all_perms},context_instance=RequestContext(request))
 
 @login_required
-@permission_required('permission.add_permission',login_url='/403.html')
+@permission_required('auth.add_permission',login_url='/403.html')
 def permission_add(request):
 	if request.method == "POST":
 		name = request.POST['name']
@@ -170,6 +175,7 @@ def permission_add(request):
 		return render_to_response('perm_add.html',{'content_types':content_types},context_instance=RequestContext(request))
 
 @login_required
+@permission_required('auth.change_permission',login_url='/403.html')
 def permission_modify(request,id):
 	perm_to_modify = Permission.objects.get(pk=id)
 	if request.method == "POST":

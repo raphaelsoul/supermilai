@@ -19,11 +19,21 @@
 			<div class="form-group">
 				<label for="basic" class="col-sm-2 control-label">拥有权限</label>
 				<div class="col-sm-8">
-					<select id="basic" class="selectpicker show-tick form-control" name="perms" data-live-search="true" multiple>
-						{%for permission in permissions%}
-						<option value="{{permission.codename}}">{{permission}}</option>
-						{%endfor%}
-					</select>
+					{%for permission in permissions%}
+					{% if group_to_modify %}
+					{#<div><p><input type="checkbox" value="{{permission.codename}}" name="perms" checked>{{permission}}{% if permision in group_to_modify.permissions.all %}6666{% endif %}</p></div>#}
+					{#{group_to_modify.permissions.all}#}
+					{% for grouppermissions in group_to_modify.permissions.all %}
+						{% ifequal  permission grouppermissions %}
+						{{grouppermissions}}<br>
+						{% else %}
+						{{permission}}<br>
+						{% endifequal %}
+					{% endfor %}
+					{% else %}
+					<div><p><input type="checkbox" value="{{permission.codename}}" name="perms">{{permission}}</p></div>
+					{% endif %}
+					{%endfor%}
 				</div>
 			</div>
 			<div class="button-group">

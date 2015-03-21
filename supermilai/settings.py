@@ -10,6 +10,8 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+#from sae.const import MYSQL_HOST, MYSQL_PORT, MYSQL_USER, MYSQL_PASS, MYSQL_DB
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
@@ -22,7 +24,7 @@ SECRET_KEY = 'k5s_4fd4&cdp#s9u54=uso!f73sc&*#=i6+i-!!z5$b^t6e*om'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-TEMPLATE_DEBUG = True
+TEMPLATE_DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -30,7 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
-    'django.contrib.admin',
+    #'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
@@ -38,12 +40,16 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
 
     'account',
+    'autotemplate',
+    'logistik',
+    'listcheck',
+    'workflow',
 )
 
 
 TEMPLATE_CONTEXT_PROCESSORS=(
     'django.core.context_processors.request',
-    #'django.core.context_processors.auth', for version before django1.4
+    #'django.core.context_processors.auth', #for version before django1.4
     'django.contrib.auth.context_processors.auth',
     'django.core.context_processors.debug',
     'django.core.context_processors.i18n',
@@ -69,17 +75,34 @@ WSGI_APPLICATION = 'supermilai.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
+if 'SERVER_SOFTWARE' in os.environ:
+    from sae.const import MYSQL_HOST, MYSQL_PORT, MYSQL_USER, MYSQL_PASS, MYSQL_DB
+else:
+    MYSQL_HOST = 'localhost'
+    MYSQL_PORT = '3306'
+    MYSQL_USER = 'root'
+    MYSQL_PASS = '123456'
+    MYSQL_DB   = 'app_supermilai'
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        #'ENGINE': 'django.db.backends.sqlite3',
+        #'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 
         #'ENGINE': 'django.db.backends.mysql',
         #'NAME': 'supermilai',
         #'USER': 'root',
         #'PASSWORD': '123456',
-        #'HOST': '',
+        #'POST': '',
         #'PORT': '',
+
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': MYSQL_DB,
+        'USER': MYSQL_USER,
+        'PASSWORD': MYSQL_PASS,
+        'HOST': MYSQL_HOST,
+        'PORT': MYSQL_PORT,
+
     }
 }
 

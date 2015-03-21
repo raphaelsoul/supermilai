@@ -1,0 +1,113 @@
+{% extends "base_proj.html" %}
+{% block page_title %}模板制作神器{% endblock %}
+
+{% block page_level_styles %}{% endblock %}
+
+{% block content_title %}模板制作神器{% endblock %}
+
+{% block main_content %}
+<div class="container-fluid">
+	<form class="form-horizontal" method="post" action="/autotemplate/">
+		<div class="row-fluid">
+			<div class="col-md-8">
+				<div class="control-group">
+					 <label class="control-label">目标模板</label>
+					 <select  name="template_code" class="form-control">
+                         					<option value="de-fdv">DE</option>
+                         					<option value="uk-sc">UK-SC</option>
+                         					<option value="uk-ag">UK-AG</option>
+                     				</select>
+				</div>
+				<div class="control-group">
+					 <label class="control-label">SKU</label>
+					 <input type="text" name="sku" class="form-control">
+				</div>
+				<div class="control-group">
+					 <label class="control-label">Item title</label>
+					 <input type="text" name="item_title" class="form-control">
+				</div>
+				<div class="control-group">
+					 <label class="control-label">Top Description<small> only for DE</small></label>
+					 <textarea class="form-control fixed" name="description_top"></textarea>
+				</div>
+				<div id="feature" class="control-group">
+					 <label class="control-label">Feature</label>
+					<a id="add-btn-feature" class="btn btn-primary btn-xs">Add Feature</a>
+					<a id="del-btn-feature" class="btn btn-danger btn-xs">Remove Feature</a><br>
+					<div id="feature-input">
+						<input type="text" class="form-control" name="feature">
+					</div>
+				</div>
+				<div class="control-group">
+					 <label class="control-label">Model No.</label>
+					 <input type="text" class="form-control" name="model_no">
+					 <label class="control-label">Color</label>
+					 <input type="text" class="form-control" name="color">
+				</div>
+				<div id="spec" class="control-group">
+					 <label class="control-label">Specifications</label>
+                     				<a id="add-btn-spec" class="btn btn-primary btn-xs">Add Specifications</a>
+					 <a id="del-btn-spec" class="btn btn-danger btn-xs">Remove Specifications</a><br>
+					 <div id="spec-input"><input type="text" class="form-control" name="spec"></div>
+
+				</div>
+				<div id="image" class="control-group">
+					 <label class="control-label">Image<small> type in the name of image files</small></label><br>
+					<a id="add-btn-img" class="btn btn-primary btn-xs">Add Image</a>
+					 <a id="del-btn-img" class="btn btn-danger btn-xs">Remove Image</a><br>
+					 <div id="img-first-input"><input type="text" class="form-control" name="img_first"></div>
+
+				</div>
+			</div>
+			<div class="col-md-4">
+			使用帮助说明：<br>
+				内部使用的Web应用，简单的一个模板生成器，任意空格都可以为空，模板只支持后台修改。<br>
+				图片替换键入图片全名，需要带<font color="red">后缀</font><br>
+				SKU与图片名称<font color="red">大小写敏感</font><br>
+			</div>
+		</div>
+		<div class="row-fluid">
+			<div class="col-md-4">
+			</div>
+			<div class="col-md-4">
+				<div class="control-group">
+					<div class="controls">
+						<button type="submit" class="btn btn-success">生成模板</button>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-4">
+			</div>
+		</div>
+	</form>
+</div>
+{% endblock %}
+
+{% block page_level_scripts %}
+<script type="text/javascript">
+$(document).ready(function(){
+  $("#add-btn-feature").click(function(){
+    $("div#feature").append("<div id='feature-input'><input type='text' class='form-control' name='feature'></div>");
+    });
+  $("#del-btn-feature").click(function(){
+    $("div#feature-input:last").remove();
+    });
+  });
+$(document).ready(function(){
+  $("#add-btn-spec").click(function(){
+    $("div#spec").append("<div id='spec-input'><input type='text' class='form-control' name='spec'></div>");
+    });
+  $("#del-btn-spec").click(function(){
+    $("div#spec-input:last").remove();
+    });
+  });
+$(document).ready(function(){
+  $("#add-btn-img").click(function(){
+    $("div#image").append("<div id='img-input'><input type='text' class='form-control' name='img'></div>");
+    });
+  $("#del-btn-img").click(function(){
+    $("div#img-input:last").remove();
+    });
+  });
+</script>
+{% endblock %}

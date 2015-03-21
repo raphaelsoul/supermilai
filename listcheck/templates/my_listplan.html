@@ -1,0 +1,71 @@
+{% extends 'base_proj.html' %}
+
+{% block page_title %}查看我的上架计划{% endblock %}
+
+{% block content_title %}查看我的上架计划{% endblock %}
+
+{% block main_content %}
+<div class="row">
+	<div class="col-md-12">
+		<table class="table table-hover">
+			<thead>
+				<th>申请人</th>
+				<th>申请店铺</th>
+				<th>提交时间</th>
+				<th>操作</th>
+			</thead>
+			<tbody>
+			{% for plan in plans%}
+				<tr>
+					<td>{{plan.poster}}</td>
+					<td>{{plan.planed_account}}</td>
+					<td>{{plan.uploadtime|date:"Y-m-d H:i:s T" }}</td>
+					<td>
+					{% if plan.check_result == 'ture' %}
+					<button class="btn btn-info btn-sm">已通过</button>
+					{% elif plan.check_result == 'false'%}
+					<button class="btn btn-danger btn-sm">待审核</button>
+					{%else%}
+					<button class="btn btn-danger btn-sm">待审核</button>
+					{% endif %}
+					<a class="btn btn-info btn-sm" href="/listcheck/detail/id={{plan.id}}">查看</a> <a class="btn btn-warning btn-sm" href="/listcheck/modify/id={{plan.id}}">编辑</a> <a id="plan-del" class="btn btn-danger btn-sm" href="/listcheck/delete/id={{plan.id}}">删除</a></td>
+				</tr>
+			{% endfor %}
+			</tbody>
+		</table>
+	</div>
+</div>
+<div class="row">
+	<div style="width:100%;text-align:center;">
+		<ul class="pagination">
+			{% if plans.has_previous %}
+			<li><a class='paginator' title='上一页' href='page={{ plans.previous_page_number }}'><span>&lt;&lt;</span></a>
+			</li>
+			{% endif %}
+			{% for page in plans.paginator.page_range %}
+				{% if page = plans.number %}
+				<li><a  class="active" href="javascript:void(0);">{{ page }}</a></li>
+				{% else %}
+				<li><a href="page={{ page }}">{{ page }}</a></li>
+				{% endif %}
+			{% endfor %}
+			{% if plans.has_next %}
+			<li><a href="page={{ plans.next_page_number }}">&raquo;</a></li>
+			{% endif %}
+		</ul>
+	</div>
+</div>
+{% endblock %}
+
+{% block page_level_scripts %}
+<script>
+/* confirm to delete a user*/
+$("a[id='plan-del']").each(function (index) {
+	$(this).click(function(){
+		if (confirm("是否确认删除?")){
+			return true
+		 } else { return false };
+	});
+});
+</script>
+{% endblock %}

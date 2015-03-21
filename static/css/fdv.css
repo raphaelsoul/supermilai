@@ -1,0 +1,126 @@
+#content
+{
+min-height: 100%;
+height: auto !important;
+height: 100%;
+margin: 0 auto -20px;
+}
+.stay-center {
+	position:absolute;
+	top:50%;
+	border:0;
+	margin:0 auto;
+	margin-top:-120px;
+	left:50%;
+	margin-left:-150px;
+}
+.cover {
+	position:fixed;
+	top: 0px;
+	right:0px;
+	bottom:0px;
+	filter: alpha(opacity=60);
+	background-color: #777;
+	z-index: 1002;
+	left: 0px;
+	display:none;
+	opacity:0.5;
+	-moz-opacity:0.5;
+}
+
+a.non-textdeco {
+	a:link{
+text-decoration:none;
+}
+a:visited{
+text-decoration:none;
+}
+a:hover{
+text-decoration:none;
+}
+a:active{
+text-decoration:none;
+}
+}
+body {
+			color: #000;
+			font-size: 14px;
+			font-family: "Helvetica Neue",Helvetica,STheiti,微软雅黑,宋体,Arial,Tahoma,sans-serif,serif;
+		}
+		/*left*/
+		.sidebar-menu{
+			border-right: 1px solid #c4c8cb;
+		}
+		/*first*/
+		.menu-first {
+			height:40px;
+			line-height:40px;
+			background-color: #66c3ec!import;
+			border-top: 1px solid #efefef !import;
+			border-bottom: 1px solid #e1e1e1 !import;
+			padding: 0 ;
+			margin: 0 ;
+			font-size: 14px;
+			font-weight: normal;
+			text-align: center;
+			text-decoration:none;
+		}
+		/*first hover*/
+		.menu-first:hover,.menu-first a:hover,.menu-first, .menu-first a:visited, .menu-first a:link {
+			text-decoration: none;
+			background-color: #f6f6f6;
+			/*background-color: #66c3ec;*/
+			border-top: 0px solid #b7b7b7;
+			border-bottom: 0px solid #acacac;
+			text-decoration:none;
+			outline:none;
+			-moz-outline:none;
+
+		}
+		/*second*/
+		.menu-second li a{
+			/*background-color: #f6f6f6;*/
+			height:31px;
+			line-height:31px;
+			border-top: 0px solid #efefef;
+			border-bottom: 0px solid #efefef;
+			font-size: 12px;
+			text-align:center;
+			text-decoration:none;
+			outline:none;
+			-moz-outline:none;
+		}
+		/*second hover*/
+		.menu-second li a:hover {
+			text-decoration: none;
+			background-color: #66c3ec;
+			border-top: 1px solid #83ceed;
+			border-bottom: 1px solid #83ceed;
+			border-right: 3px solid #f8881c;
+			border-left: 3px solid #66c3ec;
+			text-decoration:none;
+			outline:none;
+			-moz-outline:none;
+		}
+		/*second picked*/
+		.menu-second-selected {
+			background-color: #66c3ec;
+			height:31px;
+			line-height:31px;
+			border-top: 1px solid #83ceed;
+			border-bottom: 1px solid #83ceed;
+			border-right: 3px solid #f8881c;
+			border-left: 3px solid #66c3ec;
+			text-align:center;
+			text-decoration:none;
+			outline:none;
+			-moz-outline:none;
+		}
+		/*cover bootstrap*/
+		.nav-list,.nav-list li a{
+			padding: 0px;
+			margin: 0px;
+
+		}
+
+

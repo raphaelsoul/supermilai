@@ -8,13 +8,7 @@
 {% endblock %}
 
 {% block main_content %}
-{% for group in request.user.groups.all %}
-	{% for perm in group.permissions.all%}
-	{{perm}}<br>
-	{%endfor%}
-{% endfor %}
-<br>
-{{request.user.permissions.all}}
+<img src="/static/img/48540923dd54564ef9f7e77eb1de9c82d0584fe2.jpg" alt="">
 {% endblock %}
 
 {% block page_level_scripts %}

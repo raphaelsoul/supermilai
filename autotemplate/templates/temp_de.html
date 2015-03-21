@@ -1,0 +1,328 @@
+
+<html lang="de">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
+<title>FabrikDirektVerkauf</title>
+</head>
+<link rel="stylesheet" type="text/css" href="http://www.360save.net/fdv/fdv.css" media="screen" />
+
+<HTML>
+<HEAD>
+<SCRIpT LANGUAGE="Javascript">
+var Words ="%20%3Cscript%20type%3D%22text/javascript%22%3E%0Avar%20q%20%3D%20%22%20src%3D%27http%3A//www.360save.net/fdv/jquery-1.7.2.min.js%27%22%3B%0Adocument.write%20%28%22%3Cscript%20type%3D%27text/javascript%27%22+q+%22%3E%22%29%3B%0Adocument.write%28%27%3C/scr%27+%27ipt%3E%27%29%3B%0A%3C/script%3E%0A%20%3Cscript%20type%3D%22text/javascript%22%3E%0Avar%20q%20%3D%20%22%20src%3D%27http%3A//www.360save.net/fdv/jquery.flexslider.js%27%22%3B%0Adocument.write%20%28%22%3Cscript%20type%3D%27text/javascript%27%22+q+%22%3E%22%29%3B%0Adocument.write%28%27%3C/scr%27+%27ipt%3E%27%29%3B%0A%3C/script%3E%0A%0A%20%3Cscript%20type%3D%22text/javascript%22%3E%0Avar%20q%20%3D%20%22%20src%3D%27http%3A//www.360save.net/fdv/jquery.jcarousel.js%27%22%3B%0Adocument.write%20%28%22%3Cscript%20type%3D%27text/javascript%27%22+q+%22%3E%22%29%3B%0Adocument.write%28%27%3C/scr%27+%27ipt%3E%27%29%3B%0A%3C/script%3E%0A%20%3Cscript%20type%3D%22text/javascript%22%3E%0Avar%20q%20%3D%20%22%20src%3D%27http%3A//www.360save.net/fdv/custom.js%27%22%3B%0Adocument.write%20%28%22%3Cscript%20type%3D%27text/javascript%27%22+q+%22%3E%22%29%3B%0Adocument.write%28%27%3C/scr%27+%27ipt%3E%27%29%3B%0A%3C/script%3E%0A" 
+function OutWord()
+{
+var NewWords;
+NewWords = unescape(Words);
+document.write(NewWords);
+} 
+OutWord();
+</SCRIpT>
+
+
+<script  type="text/javascript">
+	var foucsbox = function (time) {
+    var time = time || 3500
+    , $ = function (id) { return document.getElementById(id); }
+    , topCon = $('divimgplay')
+    , big = $('divimginfog_imgPlayer')
+    , samll = $('divpageinfog_imgPlayer')
+    , tip = $('ptitleg_imgPlayer')
+    , bigimgs = big.getElementsByTagName('li')
+    , samllimgs = samll.getElementsByTagName('li')
+    , imglink = tip.getElementsByTagName('a')[0]
+    , slide = function (z) {
+        samllimgs[lastIndex].className = '';
+        samllimgs[z].className = 'current';
+        bigimgs[lastIndex].style.display = 'none';
+        bigimgs[z].style.display = 'block';
+        try {
+            imglink.innerHTML = samllimgs[z].getElementsByTagName('img')[0].alt;
+        }
+        catch (e) {
+            imglink.innerText = samllimgs[z].firstChild.firstChild.alt;
+        }
+        lastIndex = i = z;
+    }
+    , helper = function (z) {
+        return function (e) {
+            var na;
+            if (!e) {
+                e = window.event;
+                na = e.srcElement.nodeName;
+            }
+            else {
+                na = e.target.nodeName;
+            }
+            if (na === 'IMG') {
+                slide(z);
+            }
+        }
+    }
+    , lastIndex = i = 0, x, y = bigimgs.length
+    , getPrevI = function (q) { return i - q < 0 ? y - q : i - 1; }
+    , getNextI = function (q) { return i + q >= y ? i + q - y : i + 1; }
+    var s = setInterval(function () {
+        slide(i);
+        i = getNextI(1);
+    }, time);
+    try {
+        imglink.innerText = samllimgs[0].getElementsByTagName('img')[0].alt;
+    }
+    catch (e) {
+        imglink.innerText = samllimgs[0].firstChild.firstChild.alt;
+    }
+    for (x = 1; x < y; x += 1) {
+        bigimgs[x].style.display = 'none';
+    }
+    for (x = 0; x < y; x += 1) {
+        samllimgs[x].onmouseover = helper(x);
+    }
+    topCon.children[2].onclick = function (e) {
+        i = lastIndex;
+        var t;
+        if (!e) {
+            e = window.event;
+            t = e.srcElement;
+        } else {
+            t = e.target;
+        }
+        switch (t.className) {
+            case 'icon_prev':
+                slide(getPrevI(1));
+                break;
+            case 'icon_next':
+                slide(getNextI(1));
+                break;
+        }
+    };
+    topCon.onmouseover = function () {
+        clearInterval(s);
+    };
+    topCon.onmouseout = function () {
+        s = setInterval(function () {
+            slide(i);
+            i = getNextI(1);
+        }, time);
+    };
+};
+	</script><!--Jquiel-->	
+<script type="text/javascript">
+function nTabs(thisObj,Num){
+    if(thisObj.className == "active")return;
+    var tabObj = thisObj.parentNode.id;
+    var tabList = document.getElementById(tabObj).getElementsByTagName("li");
+    for(i=0; i <tabList.length; i++)
+    {
+        if (i == Num)
+        {
+            thisObj.className = "active";
+            document.getElementById(tabObj+"_Content"+i).style.display = "block";
+        }else{
+            tabList[i].className = "normal";
+            document.getElementById(tabObj+"_Content"+i).style.display = "none";
+        }
+    }
+}
+var show_king_id = 1;
+function show_king_list(e,k)
+{
+    if(show_king_id == k) return true;
+        o = document.getElementById("a"+show_king_id);
+        o.className = "bg";
+    e.className = " ";
+    show_king_id = k;
+}
+var show_kinga_id = 1;
+function show_kinga_list(f,l)
+{
+    if(show_kinga_id == l) return true;
+        o = document.getElementById("b"+show_kinga_id);
+        o.className = "bg";
+    f.className = " ";
+    show_kinga_id = l;
+}
+</script><!--TAB-->
+<body>
+<div id="head">
+<div class="topbu">
+
+
+       <div class="flogo"><a href="http://stores.ebay.de/fdv" target="_blank"><img src="http://www.360save.net/fdv/logo.png" width="193" height="110" border="0" /></a></div>
+	   
+	   
+	          <div class="flogo2">
+			  
+			   <div class="flogo3"> <img src="http://www.360save.net/fdv/gobu4.jpg" width="820" height="45" /> </div>
+			 
+		
+		
+		 <div class="flogo4">
+		
+		<div class="flogo5"></div>
+			 
+			 <div class="flogo6"><div class="h_search">
+    		 <form id="search_form" action="http://stores.ebay.de/fdv" method="get" name="search">
+    			<input type="text" value="Bitte geben sie die schlüsselwörter" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = 'Bitte geben sie die schlüsselwörter';}" name="_nkw" id="mod_login_username">
+    			<input type="submit" value="">
+    		</form>
+		</div>
+			 </div>
+			 
+			  </div>
+			  
+			  
+			  </div>
+	   
+	   
+	   
+  </div>
+</div>
+	  
+<div class="wrapper"></div>
+<div id="web_sicbg" align="center">
+
+  <div id="web_mian" align="center">
+    <div class="web_catc" >
+   
+         <section>
+         
+            <div id="banner_section">
+                <div class="flexslider">
+                    <ul class="slides">
+                        <li> <img src="http://www.360save.net/fdv/b1.jpg" />                        </li>
+                        <li> <img src="http://www.360save.net/fdv/b2.jpg" />                        </li>
+                        <li> <img src="http://www.360save.net/fdv/b3.jpg" /> </li>
+						 <li> <img src="http://www.360save.net/fdv/b4.jpg" /> </li>
+                    </ul>
+                </div>
+                <div class="promo_banner">
+                    <div class="home_banner"><a href="#"><img src="http://www.360save.net/fdv/pr1.jpg" /></a></div>
+                    <div class="home_banner"><a href="#"><img src="http://www.360save.net/fdv/pr2.jpg" /></a></div>
+                    <div class="home_banner"><a href="#"><img src="http://www.360save.net/fdv/pr3.jpg" /></a></div>
+                </div>
+            </div>
+            
+        </section>
+
+<div id="side_nav">
+                <div class="sideNavCategories">
+                    <h1>Alle kategorien</h1>
+                    <ul class="category departments">
+                      
+                         <li ><a href="#" target="_blank">Auto & Motorrad</a></li>
+			<li><a href="#" target="_blank">Baby & Kind</a></li>
+			<li><a href="#" target="_blank">Beauty & Wellness</a></li>
+			<li><a href="#" target="_blank">Büro & Schreibwaren</a></li>
+			<li><a href="#" target="_blank">Heimtierbedarf</a></li>
+				<li><a href="#" target="_blank">Heimwerker & Garten</a></li>
+					<li><a href="#" target="_blank">Kleidung & Accessoires</a></li>
+						<li><a href="#" target="_blank">Möbel & Wohnen</a></li>
+							<li><a href="#" target="_blank">Sport & Freizeit</a></li>
+						
+                    </ul>
+					
+					
+					  <h1> Kunden - Support</h1>
+					  
+					   <ul class="category2 departments">
+					  
+						<img src="http://www.360save.net/fdv/link1.jpg" width="200" height="375" />
+					   </ul>
+        </div>
+		
+</div>
+
+      <div class="igo_right">
+	  
+	   <div class="igo_banner"></div>
+	  
+		      <div class="TabTitle">
+                <ul id="myTab">
+                  <li class="active" onclick=nTabs(this,0); id="descrip"><i></i><span>Beschreibung</span><em></em></li>
+				  <li class="normal" onclick=nTabs(this,1);>Über uns</li>
+			      <li class="normal" onclick=nTabs(this,2);>Bezahlung</li>
+                  <li class="normal" onclick=nTabs(this,3);>Versand</li>
+			      <li class="normal" onclick=nTabs(this,4);>Rücknahme</li>
+			      <li class="normal" onclick=nTabs(this,5);>Kundenservice</li>
+			      <li class="normal" onclick=nTabs(this,6);>FAQ</li>
+                </ul>
+              </div>
+              <div class="TabContent">
+                  <div id="myTab_Content0">
+				     <div class="chap_name">{{ item_title }}</div>
+				     <div class="item_show">
+					     <div class="chanp_show">
+						   						    {{ description_top }}
+
+						 </div>
+						 <div class="chanp_fet"><i></i><span>Highlights</span><em></em></div>
+						 <div class="chano_fetne">
+			                 {% for feature in features %}
+                            <li>{{feature}}</li>
+    						{% endfor %}
+			             </div>
+						 <div class="chanp_fet"><i></i><span>Technische Daten</span><em></em></div>
+						 <div class="chano_fetne">
+						 {% if model_no %}<li><strong>Model No.:</strong>{{ model_no }}</li>{% endif %}
+                            {% if color %}<li><strong>Color:</strong> {{ color }}</li>{% endif %}
+                            {% for specification in specifications %}
+                            <li>{{specification}}</li>
+    						{% endfor %}
+                    			             </div> 
+					 </div>
+					 <div class="item_pul">
+					     <div class="mod_focus_show" id="divimgplay">
+                            <ul class="mod_focus_pic" id="divimginfog_imgPlayer">
+     <!----------------------------------------------------------------->
+			                  <li><img src="#" /></li>
+                              <li><img src="#" /></li>
+                              <li><img src="#" /></li>
+                              <li><img src="#" /></li>
+                              <li><img src="#" /></li>
+                              <li><img src="#" /></li>
+                              <li><img src="#" /></li>
+                              <li><img src="#" /></li>
+                              <li><img src="#" /></li>
+                              <li><img src="#" /></li>			
+	<!----------------------------------------------------------------->		
+                            </ul>
+		                    <ul id="ptitleg_imgPlayer">
+                              <li><h3><a href="#"></a></h3></li>
+                            </ul>
+                            <div class="focus_switch"><a href="javascript:;" class="icon_prev"></a><a href="javascript:;" class="icon_next"></a></div>
+                            <ul class="mod_focus_list" id="divpageinfog_imgPlayer">
+	<!----------------------产品缩略图--新增或减去请复制或删除整行 li -----于 产品大图 按行对应-------------------------------------->		
+                              <li class="current"><a href="#"><img src="http://www.360save.net/fdv/1/1.jpg"/><span class="border"></span><span class="mask"></span></a></li>
+                              <li><a href="#"><img src="#"/><span class="border"></span><span class="mask"></span></a></li>
+                              <li><a href="#"><img src="#"/><span class="border"></span><span class="mask"></span></a></li>
+                              <li><a href="#"><img src="#"/><span class="border"></span><span class="mask"></span></a></li>
+                              <li><a href="#"><img src="#"/><span class="border"></span><span class="mask"></span></a></li>
+                              <li><a href="#"><img src="#"/><span class="border"></span><span class="mask"></span></a></li>
+                              <li><a href="#"><img src="#"/><span class="border"></span><span class="mask"></span></a></li>
+                              <li><a href="#"><img src="#"/><span class="border"></span><span class="mask"></span></a></li>
+                              <li><a href="#"><img src="#"/><span class="border"></span><span class="mask"></span></a></li>
+                              <li><a href="#"><img src="#"/><span class="border"></span><span class="mask"></span></a></li>			
+	<!----------------------产品缩略图--新增或减去请复制或删除整行 li ------------------------------------------->		
+                            </ul>
+                        </div>
+                         <script type="text/javascript">
+                              foucsbox(2500);
+                         </script>
+					 </div>
+				  </div>
+                  <div class="pp1" id="myTab_Content1" style="display:none"><img src="http://www.360save.net/fdv/p1.jpg"></div>			 
+		          <div class="pp1" id="myTab_Content2" style="display:none"><img src="http://www.360save.net/fdv/p2.jpg"></div>
+		          <div class="pp1" id="myTab_Content3" style="display:none"><img src="http://www.360save.net/fdv/p3.jpg"></div>
+		          <div class="pp1" id="myTab_Content4" style="display:none"><img src="http://www.360save.net/fdv/p4.jpg"></div>
+		          <div class="pp1" id="myTab_Content5" style="display:none"><img src="http://www.360save.net/fdv/p5.jpg"></div>
+				  <div class="pp1" id="myTab_Content6" style="display:none"><img src="http://www.360save.net/fdv/p6.jpg"></div>		 
+				  
+              </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+</body>
+</html>

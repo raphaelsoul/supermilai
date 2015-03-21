@@ -18,6 +18,7 @@
 			<thead>
 		<tr>
 			<th>权限名</th>
+			<th>App Label</th>
 			<th>数据库模型</th>
 			<th>权限代码</th>
 			<th>操作</th>
@@ -27,6 +28,7 @@
 				{%for unique_perm in all_perms%}
 				<tr>
 					<td>{{unique_perm.name}}</td>
+					<td>{{unique_perm.content_type.app_label}}</td>
 					<td>{{unique_perm.content_type}}</td>
 					<td>{{unique_perm.codename}}</td>
 					<td>

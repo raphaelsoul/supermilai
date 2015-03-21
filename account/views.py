@@ -11,7 +11,7 @@ def account_login(request):
 	account=None
 	password=None
 	if request.method == 'POST' :
-		#print request.POST['account']
+		print request.POST['account']
 		if not request.POST.get('account'):
 			errors.append('Please Enter account')
 		else:
@@ -43,14 +43,15 @@ def account_password_change(request):
 	errors = []
 	if request.method == 'POST':
 		username = request.user
+		user_id = request.user.id
 		old_password = request.POST['old_password']
 		new_password1 = request.POST['new_password1']
 		new_password2 = request.POST['new_password2']
 		try:
-			currentuser = User.objects.get(username__exact=username)
+			currentuser = UserProfile.objects.get(id=user_id)
 			if currentuser.check_password(old_password):
 				if  new_password1 == new_password2:
-					currentuser = User.objects.get(username__exact=username)
+					#currentuser = UserProfile.objects.get(username__exact=username)
 					currentuser.set_password(new_password1)
 					currentuser.save()
 					logout(request)
@@ -59,7 +60,7 @@ def account_password_change(request):
 					errors.append('Please input the same password')
 			else:
 				errors.append('Please correct the old password')
-		except User.DoesNotExist:
+		except UserProfile.DoesNotExist:
 			return HttpResponseRedirect('/account/login.html')
 	return render_to_response('change_password.html',{'errors':errors},context_instance=RequestContext(request))
 

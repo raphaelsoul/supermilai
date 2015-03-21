@@ -12,8 +12,14 @@ class UserProfile(AbstractUser):
 			#("view_task", "Can see available tasks"),
 			("change_other_userprofile", "Can Change others Profile"),
 			("stop_userprofile", "Can userprofile"),
-			("read_first_menu_account", "Can See the first menu of user management"),
-			("read_second_menu_user", "Can See the second menu of user management"),
-			("read_second_menu_group", "Can See the second menu of group"),
-			("read_second_menu_permission", "Can See the second menu of permission"),
+
+			#permission on sidebar#
+			("read_sidebar_account", "Can See the sidebar of user management"),
+
+			("read_sidebar_logistik", "Can See the sidebar of logistik"),
+
+			("read_sidebar_mission", "Can See the sidebar of mission"),
+
+			("read_sidebar_listverify", "Can See the sidebar of listverify"),
+			("read_chiildsidebar_handle", "Can See the sidebar of handle verify"),
 			)

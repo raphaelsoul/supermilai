@@ -1,0 +1,169 @@
+{% extends 'base_proj.html' %}
+
+{% block page_title %}查询结果{% endblock %}
+
+{% block content_title %}查询结果{% endblock %}
+
+{% block main_content %}
+{% if result_type == 'container' %}
+<div class="row">
+	<div class="col-md-12">
+		<table class="table table-hover">
+			<thead>
+				<th>装箱单编号</th>
+				<th>状态</th>
+				<th>操作</th>
+			</thead>
+			<tbody>
+				{% for result in results %}
+				<tr>
+					<td>{{result.PackingListNo}}</td>
+					<td>
+						{% if result.status == 'packing'%}
+							<h5><span class="label label-danger">装箱单已出</span></h5>
+						{% elif result.status == 'shipping'%}
+							<h5><span class="label label-info">海运中</span></h5>
+						{% elif result.status == 'roading'%}
+							<h5><span class="label label-warning">公路运输中</span></h5>
+						{% elif result.status == 'storing'%}
+							<h5><span class="label label-success">抵达仓库</span></h5>
+						{% endif %}
+					</td>
+					<td>
+						<span id="father-popover"><a href="javascript:void(0)" class="btn btn-sm btn-default" data-toggle="popover" title="Timestamps" data-content="装箱单时间：{{result.packinglist_time|date:"Y-m-d"}}出运时间：{{result.depature_time|date:"Y-m-d"}}离开目的港日期：{{result.leaving_port_time|date:"Y-m-d"}}入库日期：{{result.arrival_time|date:"Y-m-d"}}">追踪</a></span>
+						<a class="btn btn-sm btn-primary" href="/logistik/container/detail/id={{result.id}}">详情</a>
+						<a class="btn btn-sm btn-warning" href="/logistik/container/modify/id={{result.id}}">编辑</a>
+					</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+</div>
+{% elif result_type == 'item' %}
+<div class="row">
+	<div class="col-md-12">
+		<table class="table table-hover">
+			<thead>
+				<th>SKU.</th>
+				<th>描述状态</th>
+				<th>模板状态</th>
+				<th>装箱单编号</th>
+				<th>模板制作人</th>
+				<th>操作</th>
+			</thead>
+			<tbody>
+				{% for result in results %}
+				<tr>
+					<td>{{result.sku}}</td>
+					<td>
+						{% if result.hasDescription %}
+							<span class="label label-success">描述已制作</span>
+						{% else %}
+							<span class="label label-danger">描述未制作</span>
+						{% endif %}
+					</td>
+					<td>
+						{% if result.hasTemp %}
+							<span class="label label-success">模板已制作</span>
+						{% else %}
+							<span class="label label-danger">模板未制作</span>
+						{% endif %}
+					</td>
+					<td>
+						<a href="/logistik/container/detail/id={{result.container.id}}">{{result.container.PackingListNo}}</a>
+					</td>
+					<td>
+						building
+					</td>
+					<td>
+						{% if result.hasTemp %}
+						<a id="undone" href="javascript:void(0);" class="btn btn-warning btn-sm" value="{{result.id}}">标记为未制作模板</a>
+						{% else %}
+						<a id="done" href="javascript:void(0);" class="btn btn-primary btn-sm" value="{{result.id}}">标记为已制作模板</a>
+						{% endif %}
+
+						{% if result.hasDescription %}
+						<a id="des-undone" href="javascript:void(0);" class="btn btn-warning btn-sm" value="{{result.id}}">标记为未制作描述</a>
+						{% else %}
+						<a id="des-done" href="javascript:void(0);" class="btn btn-info btn-sm" value="{{result.id}}">标记为已制作描述</a>
+						{% endif %}
+					</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+</div>
+{% elif result_type == 'empty' %}
+<div class="row">
+	<div class="col-md-12">
+		{% for result in results %}
+		{{result}}
+		{% endfor %}
+		<br>你可以：<br>
+		<a href="/base/view_all_containers/page=1">浏览所有装箱单</a>
+		<br>
+		<a href="/base/view_all_items/page=1">浏览所有产品</a>
+	</div>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block page_level_scripts %}
+<script type="text/javascript">
+$(document).ready(function(){
+	$("#father-popover a").popover({placement : 'top',animation: 'true'});
+});
+</script>
+<script type="text/javascript">
+$("a[id='done']").each(function (index) {
+	$(this).click(function(){
+		var value = $(this).attr('value');
+		$.post(
+			"/logistik/ajax/temp_mark.html",
+			{'sku_id': value,'action':'mark_as_done'},
+			function(data){
+				alert('刷新页面中');
+				window.location.reload();
+			});
+	});
+});
+$("a[id='undone']").each(function (index) {
+	$(this).click(function(){
+		var value = $(this).attr('value');
+		$.post(
+			"/logistik/ajax/temp_mark.html",
+			{'sku_id': value,'action':'mark_as_undone'},
+			function(data){
+				alert('刷新页面中');
+				window.location.reload();
+			});
+	});
+});
+$("a[id='des-done']").each(function (index) {
+	$(this).click(function(){
+		var value = $(this).attr('value');
+		$.post(
+			"/logistik/ajax/descrption_mark.html",
+			{'sku_id': value,'action':'des_mark_as_done'},
+			function(data){
+				alert('刷新页面中');
+				window.location.reload();
+			});
+	});
+});
+$("a[id='des-undone']").each(function (index) {
+	$(this).click(function(){
+		var value = $(this).attr('value');
+		$.post(
+			"/logistik/ajax/descrption_mark.html",
+			{'sku_id': value,'action':'des_mark_as_undone'},
+			function(data){
+				alert('刷新页面中');
+				window.location.reload();
+			});
+	});
+});
+</script>
+{% endblock %}

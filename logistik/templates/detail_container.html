@@ -1,0 +1,251 @@
+{% extends 'base_proj.html' %}
+
+{% block page_title %}装箱单详情{% endblock %}
+
+{% block content_title %}装箱单详情 <small>发现缺失则为补货产品</small>{% endblock %}
+
+{% block main_content %}
+<div class="row">
+	<div class="col-md-2"></div>
+	<div class="col-md-8">
+			<form action="#" method="post" class="form-horizontal" id="check-form" role="form">
+				<div class="form-group">
+					<div class="col-md-4">
+						<label for="">装箱单编号（必填）:</label>
+					</div>
+					<div class="col-md-8">
+						<div class="col-md-10">
+							{{container_to_view.PackingListNo}}
+						</div>
+						<div class="col-md-2"></div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-md-4">
+						<label class="control-label" for="starttime">装箱单出单时间（必填）:</label>
+					</div>
+					<div class="col-md-8">
+						<div id="datetime1_main" class="control-group">
+							<div class="date form_datetime controls" data-date="2013.05.10" id="datetime1Div">
+								<div class="col-md-10">
+									{{container_to_view.packinglist_time|date:"Y-m-d"}}
+									<span class="add-on"> <i class="icon-calendar"></i>
+									</span>
+								</div>
+								<div class="col-md-2">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-md-4">
+						<label class="control-label" for="datetime2">出运时间:</label>
+					</div>
+					<div class="col-md-8">
+						<div id="datetime2_main" class="control-group">
+							<div class="date form_datetime controls" data-date="2013.05.10" id="datetime2Div">
+								<div class="col-md-10">
+									{{container_to_view.depature_time|date:"Y-m-d"}}
+									<span class="add-on"> <i class="icon-calendar"></i>
+									</span>
+								</div>
+								<div class="col-md-2">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-md-4">
+						<label class="control-label" for="datetime3">到港日期:</label>
+					</div>
+					<div class="col-md-8">
+						<div id="datetime3_main" class="control-group">
+							<div class="date form_datetime controls" data-date="2013.05.10" id="datetime3Div">
+								<div class="col-md-10">
+									{{container_to_view.leaving_port_time|date:"Y-m-d"}}
+									<span class="add-on"> <i class="icon-calendar"></i>
+									</span>
+								</div>
+								<div class="col-md-2">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-md-4">
+						<label class="control-label" for="datetime4">入库日期:</label>
+					</div>
+					<div class="col-md-8">
+						<div id="datetime4_main" class="control-group">
+							<div class="date form_datetime controls" data-date="2013.05.10" id="datetime4Div">
+								<div class="col-md-10">
+									{{container_to_view.arrival_time|date:"Y-m-d"}}
+									<span class="add-on"> <i class="icon-calendar"></i>
+									</span>
+								</div>
+								<div class="col-md-2">
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="form-group" id="sku-container">
+				<table class="table table-hover">
+					<thead>
+						<th></th>
+						<th>SKU</th>
+						<th>描述状态</th>
+						<th>模板状态</th>
+						<th>负责人</th>
+						<th>操作</th>
+					</thead>
+					<tbody>
+						{% for sku in skus %}
+						<tr>
+							<td><input type="checkbox" name="sku-checkbox" value="{{sku.id}}"></td>
+							<td>{{sku.sku}}</td>
+							<td>
+								{% if sku.hasDescription %}
+								<span class="label label-success">已制作描述</span>
+								{% else %}
+								<span class="label label-danger">未制作描述</span>
+								{% endif %}
+							</td>
+							<td>
+								{% if sku.hasTemp %}
+								<span class="label label-success">已制作模板</span>
+								{% else %}
+								<span class="label label-danger">未制作模板</span>
+								{% endif %}
+							</td>
+							<td>
+								{% if sku.manager == None %}
+									暂无
+								{% else %}
+									{{sku.manager}}
+								{% endif %}
+							</td>
+							<td>
+								{% if sku.hasTemp %}
+								<a id="undone" href="javascript:void(0);" class="btn btn-warning btn-xs" value="{{sku.id}}">标记为未制作模板</a>
+								{% else %}
+								<a id="done" href="javascript:void(0);" class="btn btn-primary btn-xs" value="{{sku.id}}">标记为已制作模板</a>
+								{% endif %}
+
+								{% if sku.hasDescription %}
+								<a id="des-undone" href="javascript:void(0);" class="btn btn-warning btn-xs" value="{{sku.id}}">标记为未制作描述</a>
+								{% else %}
+								<a id="des-done" href="javascript:void(0);" class="btn btn-info btn-xs" value="{{sku.id}}">标记为已制作描述</a>
+								{% endif %}
+							</td>
+						</tr>
+						{%endfor%}
+					</tbody>
+				</table>
+				<div class="button-group">
+				批量标记为
+					<a id="btn-marktemp" href="javascript:void(0);" class="btn btn-primary btn-sm" value="marktemp">已制作模板</a>
+					<a id="btn-markdes" href="javascript:void(0);" class="btn btn-primary btn-sm" value="markdes">已制作描述</a>
+				</div>
+				</div>
+			</form>
+	</div>
+	<div class="col-md-2"></div>
+</div>
+{% endblock %}
+
+{% block page_level_scripts %}
+<script type="text/javascript">
+$('#btn-marktemp').click(function(){
+	var sku_ids = new Array();
+	$('#sku-container').find('input:checked').each(function(){
+		var sku_id = $(this).attr('value');
+		//alert(a);
+		sku_ids.push(sku_id);
+		//alert(sku_ids);
+	})
+	action = $('#btn-marktemp').attr('value')
+	//alert(sku_ids);
+	//alert(action);
+	$.post(
+		"/logistik/ajax/lots_size_mark.html",
+		{'action':action,'sku_ids':sku_ids},
+		function(data){
+			alert('刷新页面中');
+			window.location.reload();
+		}
+		);
+})
+$('#btn-markdes').click(function(){
+	var sku_ids = new Array();
+	$('#sku-container').find('input:checked').each(function(){
+		var sku_id = $(this).attr('value');
+		//alert(a);
+		sku_ids.push(sku_id);
+		//alert(sku_ids);
+	})
+	action = $('#btn-markdes').attr('value')
+	//alert(sku_ids);
+	//alert(action);
+	$.post(
+		"/logistik/ajax/lots_size_mark.html",
+		{'action':action,'sku_ids':sku_ids},
+		function(data){
+			alert('刷新页面中');
+			window.location.reload();
+		}
+		);
+})
+$("a[id='done']").each(function (index) {
+	$(this).click(function(){
+		var value = $(this).attr('value')
+		$.post(
+			"/logistik/ajax/temp_mark.html",
+			{'sku_id': value,'action':'mark_as_done'},
+			function(data){
+				alert('刷新页面中');
+				window.location.reload();
+			});
+	});
+});
+$("a[id='undone']").each(function (index) {
+	$(this).click(function(){
+		var value = $(this).attr('value')
+		$.post(
+			"/logistik/ajax/temp_mark.html",
+			{'sku_id': value,'action':'mark_as_undone'},
+			function(data){
+				alert('刷新页面中');
+				window.location.reload();
+			});
+	});
+});
+$("a[id='des-done']").each(function (index) {
+	$(this).click(function(){
+		var value = $(this).attr('value')
+		$.post(
+			"/logistik/ajax/descrption_mark.html",
+			{'sku_id': value,'action':'des_mark_as_done'},
+			function(data){
+				alert('刷新页面中');
+				window.location.reload();
+			});
+	});
+});
+$("a[id='des-undone']").each(function (index) {
+	$(this).click(function(){
+		var value = $(this).attr('value')
+		$.post(
+			"/logistik/ajax/descrption_mark.html",
+			{'sku_id': value,'action':'des_mark_as_undone'},
+			function(data){
+				alert('now refreshing');
+				window.location.reload();
+			});
+	});
+});
+</script>
+{% endblock %}

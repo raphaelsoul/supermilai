@@ -3,7 +3,7 @@
 		访问首页
 	</a>
 </ul>
-{% if perms.account.read_sidebar_url %}
+{% if perms.account.read_sidebar_account %}
 <ul class ="nav-header menu-first collapsed" href="#userMenu" data-toggle="collapse">
 	<a href="javascript:void(0);"> <i class="glyphicon glyphicon-user"></i>
 		用户管理
@@ -12,38 +12,91 @@
 <ul id="userMenu" class="nav nav-list collapse menu-second">
 	<li>
 		<a href="/account/manage/user_list.html">
-			用户列表
+			<i class="glyphicon glyphicon-user"></i> 用户列表
 		</a>
 	</li>
 	<li>
 		<a href="/account/manage/group_list.html">
-			权组列表
+			<i class="glyphicon glyphicon-arrow-right"></i> 权组列表
 		</a>
 	</li>
 	{% if request.user.is_superuser %}
 	<li>
 		<a href="/account/manage/permission_list.html">
-			权限列表
+			<i class="glyphicon glyphicon-th"></i> 权限列表
 		</a>
 	</li>
 	{%endif%}
 </ul>
 {%endif%}
-<ul class="nav-header menu-first collapsed"  href="#articleMenu" data-toggle="collapse">
+<ul class="nav-header menu-first collapsed"  href="#logistikMenu" data-toggle="collapse">
 	<a href="javascript:void(0);">
-		<i class="glyphicon glyphicon-book"></i>
-		文章管理
+		<!--<i class="glyphicon glyphicon-refresh"> fa-anchor</i>-->
+		<i class="fa fa-anchor"> </i>
+		 海运物流
 	</a>
 </ul>
-<ul id="articleMenu" class="nav nav-list collapse menu-second">
+<ul id="logistikMenu" class="nav nav-list collapse menu-second">
 	<li>
-		<a href="#">
-			添加文章
+		<a href="/logistik/index.html">
+			<i class="fa fa-life-ring"> </i> 物流总览
+		</a>
+	</li>
+	{% if perms.logistik.add_container %}
+	<li>
+		<a href="/logistik/add_container.html"><i class="fa fa-mail-forward"> </i> 添加箱单</a>
+	</li>
+	{% endif %}
+</ul>
+{% if perms.account.read_sidebar_mission %}
+<ul class="nav-header menu-first collapsed"  href="#workflow" data-toggle="collapse">
+	<a href="javascript:void(0);">
+		<i class="glyphicon glyphicon-pencil"></i>
+		撰写任务
+	</a>
+</ul>
+<ul id="workflow" class="nav nav-list collapse menu-second">
+	<li>
+		<a href="/workflow/all_tasks/page=1">
+			<i class="fa fa-pencil"> </i> 任务分配
 		</a>
 	</li>
 	<li>
-		<a href="#">
-			文章列表
+		<a href="/workflow/my_tasks.html"><i class="fa fa-home"> </i> 我的任务</a>
+	</li>
+	<li>
+		<a href="/logistik/view_all_items/page=1"><i class="fa fa-folder-open"> </i> 全部任务</a>
+	</li>
+	<!--<li>
+		<a href="#">完成确认</a>
+	</li>-->
+</ul>
+{% endif %}
+{% if perms.account.read_sidebar_listverify %}
+<ul class="nav-header menu-first collapsed"  href="#listcheckMenu" data-toggle="collapse">
+	<a href="javascript:void(0);">
+		<i class="glyphicon glyphicon-book"></i>
+		上架审核
+	</a>
+</ul>
+<ul id="listcheckMenu" class="nav nav-list collapse menu-second">
+	<li>
+		<a href="/listcheck/add_plan.html">
+			<i class="fa fa-graduation-cap"> </i> 新增计划
 		</a>
 	</li>
+	<li>
+		<a href="/listcheck/mylistplan/page=1"><i class="fa fa-refresh"> </i> 我的计划</a>
+	</li>
+	{% if perms.account.read_chiildsidebar_handle %}
+	<li>
+		<a href="/listcheck/handle/page=1"><i class="fa fa-shield"> </i> 审核计划</a>
+	</li>
+	{% endif %}
+</ul>
+{% endif %}
+<ul class="nav-header menu-first collapsed">
+	<a href="/autotemplate"> <i class="glyphicon glyphicon-check"></i>
+		模板制作
+	</a>
 </ul>

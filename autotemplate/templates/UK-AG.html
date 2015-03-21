@@ -1,0 +1,431 @@
+
+<style type="text/css">
+body,h1,h2,h3,h4,h5,h6,hr,p,blockquote,dl,dt,dd,ul,ol,li,pre,form,fieldset,legend,button,input,textarea,th,td{margin:0;padding:0;}
+body,button,input,select,textarea{ font-family: Arial, Helvetica, sans-serif; font-size:12px;}
+h1,h2,h3,h4,h5,h6{font-size:100%;}
+address,cite,dfn,em,var{font-style:normal;}
+ul,ol{list-style:none;}
+a{text-decoration:none;}
+a:hover{text-decoration:none;}
+fieldset,img{border:0;}
+button,input,select,textarea{font-size:100%;}
+table{border-collapse:collapse;border-spacing:0; border:1px solid #ccc; float:left; margin:10px 0 10px 25px; font-size:12px; color:#333; line-height:18px;}
+tr{border-color:#ccc; padding:5px;}
+td{border-color:#ccc;padding:5px;}
+
+#web_bg{ width:100%; height:auto; overflow:hidden; margin:0 auto; background:url(http://www.360save.net/Agetor/intro_bg.jpg) repeat; padding:7px 0;}
+.web_banner{ width:1278px;height:auto;overflow:hidden; margin:0 0  5px 0; background:url(http://www.360save.net/Agetor/banner_bg.jpg) no-repeat left center; border:3px solid #472210;border-radius:2px;box-shadow: 0 1px 2px 0 rgba(210,210,210,.31);-webkit-box-shadow: 0 1px 2px 0 rgba(180,180,180,.5); }
+.web_banner span{ display:block; position:relative;}
+.web_banner span img{ margin-left:360px; display:block;}
+.web_banner span ul{ display:block; position:absolute; top:0; right:0; background:url(../http://www.360save.net/Agetor/ban_bg.png) repeat; padding:2px 12px;border-radius:2px;}
+.web_banner span ul li{ float:left; }
+.web_banner span ul li a{ display:block;line-height:22px; padding:0px 10px; margin:8px 2px; background:#fff; border:1px solid #eaeaea;border-radius:2px; color:#5abb53; font-weight:bold;}
+.web_banner span ul li a:hover{background:#5abb53; border:1px solid #45b039; color:#fff;}
+
+.web_mian{ width:1280px; height:auto; overflow:hidden; margin:0 auto;}
+.web_mian_bg{width:1274px !important; width:1280px; height:100px;border-radius:2px;border:3px solid #472210; background:url(http://www.360save.net/Agetor/h_bvg.jpg) repeat ;margin:20px 0;}
+
+.nocil_nov{float:left; width:644px; height:100px; border-radius:2px 0 0 2px; display:inline; overflow:hidden;}
+.nocil_nov ul{ display:block; padding:8px 0; width:638px; height:88px; overflow:hidden;}
+.nocil_nov ul li{float:left; display:inline/block;}
+.nocil_nov ul li a{display:block; color:#333; font-size:14px; font-weight:bold; padding:5px 12px; margin:7px 10px; }
+.nocil_nov ul li a:hover{background:url(http://www.360save.net/Agetor/h2_bvg.jpg) bottom repeat ; border-radius:2px; color:#fff;}
+
+.nocil_features{ float:left; width:627px; height:100px; background:url(http://www.360save.net/Agetor/ncl_ft2.gif) no-repeat #5abb53; display:inline; position:relative; }
+.nocil_features i{display:block;height:0;width:0;border-width:8px;border-color: transparent transparent transparent #e1c0a5;border-style: dashed dashed dashed solid;position: absolute;left:-1px;top:42px;font-size: 0;}
+
+.web_left{ width:190px; float:left; display:inline; height:auto;}
+
+.nocil_categories{ width:174px !important; width:180px; float:left; height:auto; overflow:hidden; display:inline;border-radius:2px; margin-bottom:10px; border:3px solid #472210; background:url(http://www.360save.net/Agetor/h_bvg.jpg) repeat ;}
+.nocil_categories h2{font-size:20px; height:35px; line-height:35px; text-align:left; background:url(http://www.360save.net/Agetor/h2_bvg.jpg) repeat ; padding:0 10px; display:block; color:#e9cbb3; border-radius:2px 2px 0 0;border-bottom:3px solid #472210;text-shadow: #472210 0px -2px 0px; }
+.nocil_categories ul{display:block; overflow:hidden; width:180px; height:auto;}
+.nocil_categories ul li{text-align:left; line-height:36px; display:block; vertical-align:middle; width:180px;}
+.nocil_categories ul li a{display:block; color:#000; padding:0 13px; }
+.nocil_categories ul li a:hover{ background:url(http://www.360save.net/Agetor/h3_bvg.png) repeat ; color:#472210;}
+.nocil_categories ul li a font{ font-size:16px; font-weight:bold;}
+.nocil_categories ul li ul{ display:block; width:180px; height:auto; overflow:hidden;}
+.nocil_categories ul li ul li{text-align:left; display:block; vertical-align:middle; width:180px;}
+.nocil_categories ul li ul li a{color:#333; margin:0 10px;list-style-type:square; background:url(../http://www.360save.net/Agetor/list.jpg) no-repeat 5px 11px;line-height:14px; padding:6px 13px;}
+.nocil_categories ul li ul li a:hover{ text-decoration:underline; background:none;}
+.nocil_categories span{ display:block; width:154px; height:auto; padding:10px;}
+.nocil_categories span img{ width:154px;}
+
+.nc_webmian{ width:900px; height:auto; overflow:hidden; float:left; padding:0 0px 10px 0px;}
+.nc_mian_gg{ width:894px; margin:0 0 10px 0; height:100px; float:left;display:inline;border-radius:2px; border:3px solid #472210;}
+
+.pulz{background:#fff;overflow: hidden; width:894px !important; width:900px; float:left; height:auto;display:inline;border-radius:2px; border:3px solid #472210;}
+.pulz h2{ padding:10px 90px;height:auto; overflow:hidden; display:block; line-height:20px; text-align:center; font-size:18px; color:#282828; border-bottom:1px dashed #472210; margin:5px;border-radius:2px}
+
+.mod_focus_show { width: 720px; height:auto; position: relative; overflow: hidden; margin: 0 auto; }
+.mod_focus_show .mod_focus_pic { display: block; width:500px; height:500px; margin:0 auto; }
+.mod_focus_show .mod_focus_pic li, .mod_focus_show .mod_focus_pic a, .mod_focus_show .mod_focus_pic img { display: block; width:500px; height:500px;  }
+.mod_focus_show .mod_focus_pic li {
+	position:absolute;
+	left:96px;
+	top: 1px;
+}
+
+
+.focus_switch{ width:720px; height:0px;  z-index: 2; position:relative;}
+.focus_switch a { float: left; width:45px; height:100px; background-image: url(http://www.360save.net/Agetor/silder_btn.jpg); background-repeat: no-repeat; cursor: pointer; }
+.focus_switch .icon_prev { background-position: 0 0; margin: 0 1px 0 0; position:absolute; left:0px; top:-300px;}
+.focus_switch .icon_prev:hover { background-position: -100px 0; }
+.focus_switch .icon_next { background-position: -55px 0; position:absolute; right:0px; top:-300px; }
+.focus_switch .icon_next:hover { background-position: -155px 0; }
+.mod_focus_show .mod_focus_list { margin:6px 6px; background:#fff; overflow: hidden; height:auto;  }
+.mod_focus_show .mod_focus_list li { width:80px; height:80px; float: left; margin: 0 4px 8px 4px; position: relative; *display: inline; }
+.mod_focus_show .mod_focus_list li a { display: block; width: 80px; height: 80px; }
+.mod_focus_show .mod_focus_list li img { display: block; width: 80px; height: 80px; }
+.mod_focus_show .mod_focus_list li a:hover { _background: none; }
+.mod_focus_show .mod_focus_list li a:hover .mask, .mod_focus_show .mod_focus_list .current .mask { display: none; }
+.mod_focus_show .mod_focus_list li .mask { display: block; height: 80px; width: 80px; position: relative; top: -80px; margin: 0 0 -80px; eft: 0; bottom: 0; background: #fff; opacity: .5; filter: alpha(opacity=50); }
+.mod_focus_show .mod_focus_list li .border { display: none; }
+.mod_focus_show .mod_focus_list .current .border { display: block; height:80px; width:80px; font-size: 0; overflow: hidden; position: absolute; left: 0px; bottom:0px; background:url(http://www.360save.net/Agetor/ncl_hov.gif) no-repeat; }
+
+
+.item_show{ width:760px; margin:10px; height:auto; overflow:hidden;}
+.item_show h3{font-size:18px; text-align:left; height:40px; margin-top:15px; display:block; background:url(http://www.360save.net/Agetor/small_logo.jpg) no-repeat 0 5px; }
+.item_show h3 span{ background:#fff; text-align:left; font-style:oblique; line-height:40px; height:40px; font-size:22px; display:block; font-weight:bold; color:#333;padding:0 5px 0 0; float:left; z-index:100;position:relative; margin-left:30px;}
+.item_show h3 i{border-bottom:1px dashed #472210; height:20px; display:block;position:relative; z-index:99; margin:0 5px 0 30px;}
+.item_show h3 i em{width:5px; height:5px; overflow:hidden; line-height:5px;border-radius:10px; background:#472210; position:absolute; top:18px; right:0;}
+
+.chanpin_zhensh{text-align:left; font-size:12px; color:rgb(94, 94, 94); padding: 0 15px;font-family: Arial, Helvetica, sans-serif; font-weight:normal; line-height:28px;text-transform:capitalize;}
+.chanpin_zhensh table{ border:1px solid #999;}
+
+#categories{ width:900px; height:auto; margin:0 auto; overflow:hidden; clear:both;}
+#categories .TabTitle {height:35px; background:url(http://www.360save.net/Agetor/h2_bvg.jpg) repeat; overflow:hidden; border-radius:2px 2px 0 0; width:900px; margin:0 auto;}
+#categories .TabTitle ul{ display:block; width:760px; margin:0 auto;}
+#categories .TabTitle li{float:left;width:auto;display:block;height:35px;cursor:pointer;padding:0 20px;line-height:35px;font-size:14px;text-align:center;}
+#categories .TabTitle .active{background:url(http://www.360save.net/Agetor/h_bvg.jpg) repeat;color:#472210; font-size:14px;text-shadow: #e9cbb3 2px 0px 0px; font-weight:bold;border-radius:3px; height:25px; margin:5px;line-height:25px; padding:0 15px;}
+#categories .TabTitle .normal{background:url(http://www.360save.net/Agetor/h2_bvg.jpg) repeat; font-weight:bold;color: #e9cbb3;text-shadow: #472210 0px -2px 0px;}
+#categories .TabTitle .normal:hover{background:#329926; color:#fff;border:none; padding:0 30px;}
+#categories .TabContent {width:900px; background:#fff; height:auto; padding:20px 0px; overflow:hidden;text-align:left; font-size:12px; color:rgb(94, 94, 94);font-family: Arial, Helvetica, sans-serif; font-weight:normal; line-height:28px; }
+.zap_neir{ padding:0 2px 0 4px;}
+.zap_01{ display:block; float:left;  width:9px; height:12px; background:#472210; border-radius:10px; line-height:12px; color:#fff; font-weight:bold; font-size:12px; font-style:normal; padding-left:3px;}
+.zap_bigezc{height:auto; float:left; display:inline; width:292px; overflow:hidden; margin-right:10px;margin-bottom:10px;}
+.zap_bigezc h3{ height:28px; display:block; background:url(http://www.360save.net/Agetor/h2_bvg.jpg) repeat; border:1px solid #472210;border-radius:2px 2px 0 0; color:#fcf17d; font-size:18px; padding:0 10px;}
+.zap_bigezc_bb{ height:56px; padding:5px 10px; border:1px solid #472210; border-top:none; background:#fdfdfd;display:block;}
+.zap_bigezc_bb h4{ font-size:16px;}
+
+.zap_noto{ width:760px; height:auto; overflow:hidden; }
+.zap_noto h3{ display:block; float:left; font-size:36px; background:url(http://www.360save.net/Agetor/h_bvg.jpg) repeat; height:122px; line-height:120px;color:#582004; padding:5px; }
+
+.zap_noto_via{ float:left; line-height:18px; height:130px; width:auto; border:1px solid #DCB79A; border-left:none;  background:#F0E0D3; }
+.zap_noto_via h5{ font-size:16px; color:#472210; padding:10px 10px 0 10px;}
+.zap_noto_via ul{ padding:0 10px 10px 10px;}
+
+.guyaran_gan{background:#fff;overflow: hidden;width:894px !important; width:900px; float:left; height:auto;display:inline;border-radius:2px; margin-top:10px; position:relative; border:3px solid #472210;}
+.guyaran_gan img{}
+.guyaran_gan i{ display:block; background:url(../http://www.360save.net/Agetor/guy_il.jpg) no-repeat; width:7px; height:98px; position:absolute; left:0px; top:181px;}
+.guyaran_gan em{ display:block; background:url(../http://www.360save.net/Agetor/guy_top.jpg) no-repeat; width:95px; height:8px; position:absolute; left:153px; top:17px;}
+
+.web_right{width:190px; float:right;display:inline; height:auto; }
+.new_arrival{ width:174px !important; width:180px; float:right; height:auto; overflow:hidden; display:inline; border:3px solid #472210; background:url(http://www.360save.net/Agetor/h_bvg.jpg) repeat ;border-radius:2px; margin-bottom:10px;}
+.new_arrival h2{font-size:20px; height:35px; line-height:35px; text-align:left; background:#5abb53; padding:0 10px; display:block; color:#fff; border-radius:2px 2px 0 0; border:1px solid #45b039;}
+.new_arrival ul{display:block; width:180px; height:auto; overflow:hidden;}
+.new_arrival ul li{ display:block; border-bottom:1px solid #5abb53; position:relative; width:160px; height:auto; overflow:hidden; margin:10px; padding-bottom:10px;}
+.new_arrival ul li img{ width:160px; height:auto; display:block;}
+.new_arrival ul li .new{ display:block; width:33px; height:21px; background:url(../http://www.360save.net/Agetor/new.png) no-repeat; position:absolute;}
+.new_arrival ul li .deals{display:block; width:33px; height:21px; background:url(../http://www.360save.net/Agetor/deals50.png) no-repeat; position:absolute;}
+.new_arrival ul li a span{text-align:left; display:block; width:160px; padding-top:10px;}
+.new_arrival ul li a{ color:rgb(94, 94, 94); text-align:left;}
+.new_arrival ul li a:hover{ color:#FF6600; text-decoration:underline;}
+
+.new_arrival p{display:block; position:relative; width:154px; height:auto; overflow:hidden; margin:10px;border-radius:2px;}
+.new_arrival p a{display:block;}
+.new_arrival p a img{width:154px; height:auto;}
+
+.pulz1 {background:#fff;overflow: hidden; width:894px !important; width:900px; float:left; height:auto;display:inline;border-radius:2px; border:3px solid #472210;}
+.new_arrival1 {width:174px !important; width:180px; float:right; height:auto; overflow:hidden; display:inline; border:3px solid #472210; background:url(http://www.360save.net/Agetor/h_bvg.jpg) repeat ;border-radius:2px; margin-bottom:10px;}
+.new_arrival11 {width:174px !important; width:180px; float:right; height:auto; overflow:hidden; display:inline; border:3px solid #472210; background:url(http://www.360save.net/Agetor/h_bvg.jpg) repeat ;border-radius:2px; margin-bottom:10px;}
+.pulz2 {background:#fff;overflow: hidden; width:894px !important; width:900px; float:left; height:auto;display:inline;border-radius:2px; border:3px solid #472210;}
+.new_arrival111 {width:174px !important; width:180px; float:right; height:auto; overflow:hidden; display:inline; border:3px solid #472210; background:url(http://www.360save.net/Agetor/h_bvg.jpg) repeat ;border-radius:2px; margin-bottom:10px;}
+.pulz3 {background:#fff;overflow: hidden; width:894px !important; width:900px; float:left; height:auto;display:inline;border-radius:2px; border:3px solid #472210;}
+.pulz21 {background:#fff;overflow: hidden; width:894px !important; width:900px; float:left; height:auto;display:inline;border-radius:2px; border:3px solid #472210;}
+.new_arrival1111 {width:174px !important; width:180px; float:right; height:auto; overflow:hidden; display:inline; border:3px solid #472210; background:url(http://www.360save.net/Agetor/h_bvg.jpg) repeat ;border-radius:2px; margin-bottom:10px;}
+.pulz4 {background:#fff;overflow: hidden; width:894px !important; width:900px; float:left; height:auto;display:inline;border-radius:2px; border:3px solid #472210;}
+.pulz211 {background:#fff;overflow: hidden; width:894px !important; width:900px; float:left; height:auto;display:inline;border-radius:2px; border:3px solid #472210;}
+.pulz31 {background:#fff;overflow: hidden; width:894px !important; width:900px; float:left; height:auto;display:inline;border-radius:2px; border:3px solid #472210;}
+.new_arrival11111 {width:174px !important; width:180px; float:right; height:auto; overflow:hidden; display:inline; border:3px solid #472210; background:url(http://www.360save.net/Agetor/h_bvg.jpg) repeat ;border-radius:2px; margin-bottom:10px;}
+.pulz5 {background:#fff;overflow: hidden; width:894px !important; width:900px; float:left; height:auto;display:inline;border-radius:2px; border:3px solid #472210;}
+.pulz2111 {background:#fff;overflow: hidden; width:894px !important; width:900px; float:left; height:auto;display:inline;border-radius:2px; border:3px solid #472210;}
+.pulz311 {background:#fff;overflow: hidden; width:894px !important; width:900px; float:left; height:auto;display:inline;border-radius:2px; border:3px solid #472210;}
+.pulz41 {background:#fff;overflow: hidden; width:894px !important; width:900px; float:left; height:auto;display:inline;border-radius:2px; border:3px solid #472210;}
+.new_arrival111111 {width:174px !important; width:180px; float:right; height:auto; overflow:hidden; display:inline; border:3px solid #472210; background:url(http://www.360save.net/Agetor/h_bvg.jpg) repeat ;border-radius:2px; margin-bottom:10px;}
+.pulz6 {background:#fff;overflow: hidden; width:894px !important; width:900px; float:left; height:auto;display:inline;border-radius:2px; border:3px solid #472210;}
+.pulz21111 {background:#fff;overflow: hidden; width:894px !important; width:900px; float:left; height:auto;display:inline;border-radius:2px; border:3px solid #472210;}
+.pulz3111 {background:#fff;overflow: hidden; width:894px !important; width:900px; float:left; height:auto;display:inline;border-radius:2px; border:3px solid #472210;}
+.pulz411 {background:#fff;overflow: hidden; width:894px !important; width:900px; float:left; height:auto;display:inline;border-radius:2px; border:3px solid #472210;}
+.pulz51 {background:#fff;overflow: hidden; width:894px !important; width:900px; float:left; height:auto;display:inline;border-radius:2px; border:3px solid #472210;}
+.new_arrival2 {width:174px !important; width:180px; float:right; height:auto; overflow:hidden; display:inline; border:3px solid #472210; background:url(http://www.360save.net/Agetor/h_bvg.jpg) repeat ;border-radius:2px; margin-bottom:10px;}
+.pulz11 {background:#fff;overflow: hidden; width:894px !important; width:900px; float:left; height:auto;display:inline;border-radius:2px; border:3px solid #472210;}
+.new_arrival1111111 {width:174px !important; width:180px; float:right; height:auto; overflow:hidden; display:inline; border:3px solid #472210; background:url(http://www.360save.net/Agetor/h_bvg.jpg) repeat ;border-radius:2px; margin-bottom:10px;}
+.pulz7 {background:#fff;overflow: hidden; width:894px !important; width:900px; float:left; height:auto;display:inline;border-radius:2px; border:3px solid #472210;}
+.pulz211111 {background:#fff;overflow: hidden; width:894px !important; width:900px; float:left; height:auto;display:inline;border-radius:2px; border:3px solid #472210;}
+.pulz31111 {background:#fff;overflow: hidden; width:894px !important; width:900px; float:left; height:auto;display:inline;border-radius:2px; border:3px solid #472210;}
+.pulz4111 {background:#fff;overflow: hidden; width:894px !important; width:900px; float:left; height:auto;display:inline;border-radius:2px; border:3px solid #472210;}
+.pulz511 {background:#fff;overflow: hidden; width:894px !important; width:900px; float:left; height:auto;display:inline;border-radius:2px; border:3px solid #472210;}
+.pulz61 {background:#fff;overflow: hidden; width:894px !important; width:900px; float:left; height:auto;display:inline;border-radius:2px; border:3px solid #472210;}
+</style>
+<script  type="text/javascript">
+	var foucsbox = function (time) {
+    var time = time || 3500
+    , $ = function (id) { return document.getElementById(id); }
+    , topCon = $('divimgplay')
+    , big = $('divimginfog_imgPlayer')
+    , samll = $('divpageinfog_imgPlayer')
+    , tip = $('ptitleg_imgPlayer')
+    , bigimgs = big.getElementsByTagName('li')
+    , samllimgs = samll.getElementsByTagName('li')
+    , imglink = tip.getElementsByTagName('a')[0]
+    , slide = function (z) {
+        samllimgs[lastIndex].className = '';
+        samllimgs[z].className = 'current';
+        bigimgs[lastIndex].style.display = 'none';
+        bigimgs[z].style.display = 'block';
+        try {
+            imglink.innerHTML = samllimgs[z].getElementsByTagName('img')[0].alt;
+        }
+        catch (e) {
+            imglink.innerText = samllimgs[z].firstChild.firstChild.alt;
+        }
+        lastIndex = i = z;
+    }
+    , helper = function (z) {
+        return function (e) {
+            var na;
+            if (!e) {
+                e = window.event;
+                na = e.srcElement.nodeName;
+            }
+            else {
+                na = e.target.nodeName;
+            }
+            if (na === 'IMG') {
+                slide(z);
+            }
+        }
+    }
+    , lastIndex = i = 0, x, y = bigimgs.length
+    , getPrevI = function (q) { return i - q < 0 ? y - q : i - 1; }
+    , getNextI = function (q) { return i + q >= y ? i + q - y : i + 1; }
+    var s = setInterval(function () {
+        slide(i);
+        i = getNextI(1);
+    }, time);
+    try {
+        imglink.innerText = samllimgs[0].getElementsByTagName('img')[0].alt;
+    }
+    catch (e) {
+        imglink.innerText = samllimgs[0].firstChild.firstChild.alt;
+    }
+    for (x = 1; x < y; x += 1) {
+        bigimgs[x].style.display = 'none';
+    }
+    for (x = 0; x < y; x += 1) {
+        samllimgs[x].onmouseover = helper(x);
+    }
+    topCon.children[2].onclick = function (e) {
+        i = lastIndex;
+        var t;
+        if (!e) {
+            e = window.event;
+            t = e.srcElement;
+        } else {
+            t = e.target;
+        }
+        switch (t.className) {
+            case 'icon_prev':
+                slide(getPrevI(1));
+                break;
+            case 'icon_next':
+                slide(getNextI(1));
+                break;
+        }
+    };
+    topCon.onmouseover = function () {
+        clearInterval(s);
+    };
+    topCon.onmouseout = function () {
+        s = setInterval(function () {
+            slide(i);
+            i = getNextI(1);
+        }, time);
+    };
+};
+	</script><!--Jquiel-->	
+<script type="text/javascript">
+function nTabs(thisObj,Num){
+    if(thisObj.className == "active")return;
+    var tabObj = thisObj.parentNode.id;
+    var tabList = document.getElementById(tabObj).getElementsByTagName("li");
+    for(i=0; i <tabList.length; i++)
+    {
+        if (i == Num)
+        {
+            thisObj.className = "active";
+            document.getElementById(tabObj+"_Content"+i).style.display = "block";
+        }else{
+            tabList[i].className = "normal";
+            document.getElementById(tabObj+"_Content"+i).style.display = "none";
+        }
+    }
+}
+var show_king_id = 1;
+function show_king_list(e,k)
+{
+    if(show_king_id == k) return true;
+        o = document.getElementById("a"+show_king_id);
+        o.className = "bg";
+    e.className = " ";
+    show_king_id = k;
+}
+var show_kinga_id = 1;
+function show_kinga_list(f,l)
+{
+    if(show_kinga_id == l) return true;
+        o = document.getElementById("b"+show_kinga_id);
+        o.className = "bg";
+    f.className = " ";
+    show_kinga_id = l;
+}
+</script><!--TAB-->
+
+
+<div id="web_bg" align="center">
+   <div class="web_banner">
+      <span><a href="http://stores.ebay.co.uk/Agetor" target="_blank"><img src="http://www.360save.net/Agetor/banners.gif" width="920" height="120" border="0"></a>	 </span>   </div>
+<div class="web_mian"></div>
+   
+   <div class="web_mian">
+     <div class="web_left">
+       <div class="nocil_categories">
+		  <h2>Helpful Links</h2>
+		  <ul>
+		    <li><a href="#" onClick="window.external.addFavorite('http://stores.ebay.co.uk/Agetor','Agetor')">Add To Favorite Sellers</a></li>
+			<li><a href="http://my.ebay.uk/ws/eBayISAPI.dll?AcceptSavedSeller&sellerid=Agetor" target="_blank">Sign Up For Newsletter</a></li>
+			<li><a href="http://feedback.ebay.co.uk/ws/eBayISAPI.dll?ViewFeedback2&userid=savechannel&ftab=AllFeedback" target="_blank">View Feedback</a></li>
+			<li><a href="http://qu.ebay.com/survey?srvName=Stores%20%28Storefront30%29&rt=nc" target="_blank">Ask Seller a Question</a></li>
+			<li><a href="http://stores.ebay.co.uk/Agetor" target="_blank">Visit Seller's eBay Shop</a></li>
+		  </ul>
+	   </div>
+		
+		<div class="nocil_categories"><span><img src="http://www.360save.net/Agetor/cust.jpg"/></span></div>		
+		<div class="nocil_categories"><span><img src="http://www.360save.net/Agetor/fedex.jpg" width="160" height="112"/></span></div>
+		<div class="nocil_categories"><span><img src="http://www.360save.net/Agetor/usas.jpg"/></span></div>
+		
+     </div>
+	  
+	  <div class="nc_webmian">	   
+	 
+	  <div class="pulz">
+	    <h2>{{item_title}}</h2>
+	    <div class="mod_focus_show" id="divimgplay">
+        <ul class="mod_focus_pic" id="divimginfog_imgPlayer">
+	<li><img src="http://www.360save.net/eBayUK/{{sku}}/{{img_first}}" /></li>
+	{%for img in imgs%}
+            <li><img src="http://www.360save.net/eBayUK/{{sku}}/{{img}}" /></li>
+            {% endfor %}
+
+        </ul>
+		<ul id="ptitleg_imgPlayer">
+            <li>
+                <h3><a href="#"></a></h3>         
+            </li>
+        </ul>
+        
+        <ul class="mod_focus_list" id="divpageinfog_imgPlayer">
+
+            <li class="current"><a href="#"><img src="http://www.360save.net/eBayUK/{{sku}}/{{img_first}}"/><span class="border"></span><span class="mask"></span></a></li>
+            {%for img in imgs%}
+            <li><a href="#"><img src="http://www.360save.net/eBayUK/{{sku}}/{{img}}"/><span class="border"></span><span class="mask"></span></a></li>
+            {% endfor %}
+        </ul>
+    </div>
+    <script type="text/javascript">
+        foucsbox(2500);
+    </script>					
+		 <div class="item_show">
+			<h3><span>Feature</span><i><em></em></i></h3>
+			<div class="chanpin_zhensh">
+			<ul>
+			{%for feature in features%}          
+		      	<li>{{feature}}</li>
+		      	{%endfor%}
+		      	</ul>
+			</div>
+		</div>
+
+		<div class="item_show" style="margin-bottom:40px;">
+			<h3><span>Specification</span><i><em></em></i></h3>
+			<!--标题-->
+			<div class="chanpin_zhensh">
+			<ul>
+			  <li>Color: {{color}}</li>
+			  {%for specification in specifications%}
+			  <li>{{specification}}</li>
+			  {%endfor%}
+		      </ul>
+		  </div>
+		</div>
+	  </div>
+	  <div class="pulz" style="margin-top:10px;">
+	    <a id="about001" name="about001"></a>
+	    <div id="categories" align="center">
+        <div class="TabTitle">
+          <ul id="myTab">
+            <li class="normal" onmousemove=nTabs(this,0);>About Us</li>
+			<li class="normal" onmousemove=nTabs(this,1);>Payment</li>
+            <li class="active" onmousemove=nTabs(this,2);>Shipping</li>
+			<li class="normal" onmousemove=nTabs(this,3);>Returns</li>
+			<li class="normal" onmousemove=nTabs(this,4);>Contact Us</li>
+			<li class="normal" onmousemove=nTabs(this,5);>FAQ</li>
+          </ul>
+        </div>
+        <div class="TabContent">
+          <div class="none" id="myTab_Content0" style="display:none">
+		    <div class="zap_neir">
+			<img src="http://www.360save.net/Agetor/about.PNG" >
+			</div>
+		  </div>
+          <div class="none" id="myTab_Content1" style="display:none">
+		    <div class="zap_neir">
+		     	<img src="http://www.360save.net/Agetor/PAYMENT.PNG" >
+			</div>  
+		  </div>			 
+		  <div id="myTab_Content2">
+		     <div class="zap_neir">
+			  <img src="http://www.360save.net/Agetor/shipping.PNG" >
+			 </div>
+		  </div>
+		  <div class="none" id="myTab_Content3" style="display:none">
+		     <div class="zap_neir">
+		 <img src="http://www.360save.net/Agetor/RETURNS.PNG" >
+			 </div>
+		  </div>
+		  <div class="none" id="myTab_Content4" style="display:none">
+		     <div class="zap_neir">
+			   <img src="http://www.360save.net/Agetor/CONTACT.PNG" > 
+			 </div>
+		  </div>
+		  <div class="none" id="myTab_Content5" style="display:none">
+		       <div class="zap_neir">
+		        <img src="http://www.360save.net/Agetor/qa.PNG" > 
+
+              </div>
+
+		  </div>		 
+        </div>
+     </div>     
+	</div>
+
+	
+	</div>
+	  
+	  <div class="web_right">
+	     <div class="new_arrival"><p><a href="#"><img src="http://www.360save.net/Agetor/newarrival.gif" /></a></p></div>
+		 <div class="new_arrival"><p><a href="#"><img src="http://www.360save.net/Agetor/hotsales.gif" /></a></p></div>
+		 <div class="new_arrival"><p><a href="#"><img src="http://www.360save.net/Agetor/50off.gif" /></a></p></div>
+		 <div class="new_arrival"><p><a href="#"><img src="http://www.360save.net/Agetor/lowestprice.gif" /></a></p></div>
+	  </div>
+   </div>

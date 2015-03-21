@@ -1,0 +1,7 @@
+name: supermilai
+version: 3
+
+libraries:
+- name: "django"
+  version: "1.7"
+

@@ -1,0 +1,129 @@
+{% extends 'base_proj.html' %}
+
+{% block page_title %}我领取的任务{% endblock %}
+
+{% block content_title %}我领取的任务{% endblock %}
+
+{% block main_content %}
+<div class="row">
+	<table class="table table-condensed">
+		<thead>
+			<th>SKU</th>
+			<th>描述状态</th>
+			<th>模板状态</th>
+			<th>负责人</th>
+			<th>装箱单编号</th>
+			<th>操作</th>
+		</thead>
+		<tbody>
+			{%for item in items%}
+			<tr>
+				<td>{{item.sku}}</td>
+				<td>
+					{% if item.hasDescription %}
+					<span class="label label-success">已制作描述</span>
+					{% else %}
+					<span class="label label-danger">未制作描述</span>
+					{% endif %}
+				</td>
+				<td>
+					{% if item.hasTemp %}
+					<span class="label label-success">已制作模板</span>
+					{% else %}
+					<span class="label label-danger">未制作模板</span>
+					{% endif %}
+				</td>
+				<td>{{item.manager.truename}}</td>
+				<td><a href="/logistik/container/detail/id={{item.container.id}}">{{item.container.PackingListNo}}</a></td>
+				<td>
+					{% if item.hasTemp %}
+					<a id="undone" href="javascript:void(0);" class="btn btn-warning btn-sm" value="{{item.id}}">标记为未制作模板</a>
+					{% else %}
+					<a id="done" href="javascript:void(0);" class="btn btn-primary btn-sm" value="{{item.id}}">标记为已制作模板</a>
+					{% endif %}
+
+					{% if item.hasDescription %}
+					<a id="des-undone" href="javascript:void(0);" class="btn btn-warning btn-sm" value="{{item.id}}">标记为未制作描述</a>
+					{% else %}
+					<a id="des-done" href="javascript:void(0);" class="btn btn-info btn-sm" value="{{item.id}}">标记为已制作描述</a>
+					{% endif %}
+				</td>
+			</tr>
+			{%endfor%}
+		</tbody>
+	</table>
+</div>
+<div class="row">
+	<div style="width:100%;text-align:center;">
+		<ul class="pagination">
+			{% if items.has_previous %}
+			<li><a class='paginator' title='上一页' href='page={{ items.previous_page_number }}'><span>&lt;&lt;</span></a>
+			</li>
+			{% endif %}
+			{% for page in items.paginator.page_range %}
+				{% if page = items.number %}
+				<li><a  class="active" href="javascript:void(0);">{{ page }}</a></li>
+				{% else %}
+				<li><a href="page={{ page }}">{{ page }}</a></li>
+				{% endif %}
+			{% endfor %}
+			{% if items.has_next %}
+			<li><a href="page={{ items.next_page_number }}">&raquo;</a></li>
+			{% endif %}
+		</ul>
+	</div>
+</div>
+{% endblock %}
+
+{% block page_level_scripts %}
+<script type="text/javascript">
+$("a[id='done']").each(function (index) {
+	$(this).click(function(){
+		var value = $(this).attr('value');
+		$.post(
+			"/logistik/ajax/temp_mark.html",
+			{'sku_id': value,'action':'mark_as_done'},
+			function(data){
+				alert('刷新页面中');
+				window.location.reload();
+			});
+	});
+});
+$("a[id='undone']").each(function (index) {
+	$(this).click(function(){
+		var value = $(this).attr('value');
+		$.post(
+			"/logistik/ajax/temp_mark.html",
+			{'sku_id': value,'action':'mark_as_undone'},
+			function(data){
+				alert('刷新页面中');
+				window.location.reload();
+			});
+	});
+});
+$("a[id='des-done']").each(function (index) {
+	$(this).click(function(){
+		var value = $(this).attr('value');
+		$.post(
+			"/logistik/ajax/descrption_mark.html",
+			{'sku_id': value,'action':'des_mark_as_done'},
+			function(data){
+				alert('刷新页面中');
+				window.location.reload();
+			});
+	});
+});
+$("a[id='des-undone']").each(function (index) {
+	$(this).click(function(){
+		var value = $(this).attr('value');
+		$.post(
+			"/logistik/ajax/descrption_mark.html",
+			{'sku_id': value,'action':'des_mark_as_undone'},
+			function(data){
+				alert('刷新页面中');
+				//window.location.reload();
+			});
+	});
+});
+</script>
+{% endblock %}

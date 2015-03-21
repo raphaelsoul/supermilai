@@ -33,7 +33,11 @@
 			<td><input type="checkbox" value="{{user.pk}}"></td>
 			<td>{{user.username}}</td>
 			<td>{{user.truename}}</td>
-			<td>{%for group in user.groups.all%}{{group}}{%endfor%}</td>
+			<td>
+			{%for group in user.groups.all%}
+				 <span class="label label-info">{{group}}</span>
+			{%endfor%}
+			</td>
 			<td>
 				<span class="label label-{{user.is_active|yesno:"success,warning,danger"}}">{{user.is_active|yesno:"是,否,空"}}</span>
 				<span class="label label-{{user.is_staff|yesno:"success,warning,danger"}}">{{user.is_staff|yesno:"是,否,空"}}</span>
@@ -61,7 +65,7 @@
 							<h4 class="modal-title" id="myModalLabel">为{{user.truename}}设置权限组</h4>
 						</div>
 						<div class="modal-body">
-							<div class="row">
+							<!--<div class="row">
 								<div class="col-md-2">
 									<label for="span-{{user.pk}}" class="control-label">现属权组</label>
 								</div>
@@ -69,13 +73,13 @@
 									<span id="span-{{user.pk}}">{% for cgroup in user.groups.all %}{{cgroup}}{%endfor%}</span>
 								</div>
 								<div class="col-md-4"></div>
-							</div>
+							</div>-->
 							<div class="row">
 								<div class="col-md-2">
 									<label for="group-to-choose-{{user.pk}}" class="control-label">权组</label>
 								</div>
 								<div class="col-md-6" id="select-container">
-									<select name="group-to-choose" id="group-to-choose-{{user.pk}}" class="form-control">
+									<select name="group-to-choose" id="group-to-choose-{{user.pk}}" class="form-control selectpicker" multiple>
 										{% for group in groups %}
 										<option value="{{group.pk}}" {% for ugroup in user.groups.all %}{% if ugroup == group %}selected="selected"{% endif %}{% endfor %}>{{group}}</option>
 										{% endfor %}
@@ -99,11 +103,13 @@
 	</div>
 </div>
 <div id="cover" class="cover">
-	<img class="stay-center" src="/static/img/loading.gif" style="margin:0 auto;">
+	<i class="fa fa-spinner fa-spin stay-center"></i>
+	<!--<img class="stay-center" src="/static/img/loading.gif" style="margin:0 auto;">-->
 </div>
 {% endblock %}
 
 {% block page_level_plugins %}
+
 	<script src="/static/plugins/bootstrap-select/dist/js/bootstrap-select.min.js"></script>
 	<script src="http://cdn.bootcss.com/bootstrap-select/1.6.3/js/i18n/defaults-zh_CN.min.js"></script>
 {% endblock %}
@@ -155,11 +161,15 @@ $("a[id='user-del']").each(function (index) {
 /*post via ajax to set group of a user*/
 $("button[id='set-group']").each(function (index) {
 	$(this).click(function(){
-		 var group_id = $(this).parent().prev().find('#select-container').children(':first').find('option:selected').val();
-		 var user_id = $(this).attr('value');
+		var group_ids = new Array();
+		var user_id = $(this).attr('value');
+		 $(this).parent().prev().find('#select-container').children(':first').find('option:selected').each(function(){
+		 	var group_id = $(this).val();
+		 	group_ids.push(group_id);
+		 });
 		 $.post(
 		 	"/account/ajax/set_group.html",
-		 	{'group_id':group_id,'user_id':user_id},
+		 	{'group_ids':group_ids,'user_id':user_id},
 		 	function(data){
 		 		alert('刷新页面中');
 		 		window.location.reload();

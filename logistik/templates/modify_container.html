@@ -1,0 +1,202 @@
+{% extends 'base_proj.html' %}
+
+{% block page_title %}编辑{% endblock %}
+
+{% block content_title %}编辑<small>补货产品会被自动过滤，不会被添加进数据库中</small>{% endblock %}
+
+{% block main_content %}
+<div class="row">
+	<div class="col-md-2"></div>
+	<div class="col-md-8">
+			<form action="/logistik/container/modify/id={{container_to_modify.id}}" method="post" class="form-horizontal" role="form">
+				<div class="form-group">
+					<div class="col-md-4">
+						<label for="">装箱单号（必填）:</label>
+					</div>
+					<div class="col-md-8">
+						<div class="col-md-10">
+							<input type="text" class="form-control" name="packing_list_no" placeholder="please type in packing list no" required="required" maxlength="20" value="{{container_to_modify.PackingListNo}}">
+						</div>
+						<div class="col-md-2"></div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-md-4">
+						<label class="control-label" for="starttime">装箱单出单时间（必填）:</label>
+					</div>
+					<div class="col-md-8">
+						<div id="datetime1_main" class="control-group">
+							<div class="date form_datetime controls" data-date="2013.05.10" id="datetime1Div">
+								<div class="col-md-10">
+									<input type="text" name="datetime1" class="form-control" id="datetime1" readonly="" required="required" value="{{container_to_modify.packinglist_time|date:"Y-m-d"}}">
+									<span class="add-on"> <i class="icon-calendar"></i>
+									</span>
+								</div>
+								<div class="col-md-2">
+									<a href="javascript:void(0)" id="clear1">clear</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-md-4">
+						<label class="control-label" for="datetime2">出运时间:</label>
+					</div>
+					<div class="col-md-8">
+						<div id="datetime2_main" class="control-group">
+							<div class="date form_datetime controls" data-date="2013.05.10" id="datetime2Div">
+								<div class="col-md-10">
+									<input type="text" name="datetime2" class="form-control" value="{% if container_to_modify.depature_time == None %}{%else%}{{container_to_modify.depature_time|date:"Y-m-d"}}{%endif%}" id="datetime2" readonly="">
+									<span class="add-on"> <i class="icon-calendar"></i>
+									</span>
+								</div>
+								<div class="col-md-2">
+									<a href="javascript:void(0)" id="clear2">clear</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-md-4">
+						<label class="control-label" for="datetime3">到港日期:</label>
+					</div>
+					<div class="col-md-8">
+						<div id="datetime3_main" class="control-group">
+							<div class="date form_datetime controls" data-date="2013.05.10" id="datetime3Div">
+								<div class="col-md-10">
+									<input type="text" class="form-control" name="datetime3" value="{% if container_to_modify.leaving_port_time == None %}{%else%}{{container_to_modify.leaving_port_time|date:"Y-m-d"}}{%endif%}" id="datetime3" readonly="">
+									<span class="add-on"> <i class="icon-calendar"></i>
+									</span>
+								</div>
+								<div class="col-md-2">
+									<a href="javascript:void(0)" id="clear3">clear</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-md-4">
+						<label class="control-label" for="datetime4">入库日期:</label>
+					</div>
+					<div class="col-md-8">
+						<div id="datetime4_main" class="control-group">
+							<div class="date form_datetime controls" data-date="2013.05.10" id="datetime4Div">
+								<div class="col-md-10">
+									<input type="text" class="form-control" name="datetime4" value="{% if container_to_modify.arrival_time == None %}{%else%}{{container_to_modify.arrival_time|date:"Y-m-d"}}{%endif%}" id="datetime4" readonly="">
+									<span class="add-on"> <i class="icon-calendar"></i>
+									</span>
+								</div>
+								<div class="col-md-2">
+									<a href="javascript:void(0)" id="clear4">clear</a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="form-group" id="sku-container">
+				<table class="table table-hover">
+					<thead>
+						<th>SKU</th>
+						<th>模板状态</th>
+						<th>操作</th>
+					</thead>
+					<tbody id="sku-tbody">
+						{% for sku in skus %}
+						<tr>
+							<td>
+								<input type='text' maxlength='30' name='sku' required='required' value='{{sku.sku}}' placeholder='type in an SKU'>
+								<select name="hasTemp" class="form-control" style="display:none;">
+									{% if sku.hasTemp %}
+									<option value="1" selected>已制作模板</option>
+									<option value="0">未制作模板</option>
+									{% else %}
+									<option value="1">已制作模板</option>
+									<option value="0"  selected>未制作模板</option>
+									{% endif %}
+						</select></td>
+							<td>
+								{% if sku.hasTemp %}
+								<span class='label label-info'>模板已制作</span>
+								{% else %}
+								<span class='label label-danger'>模板未制作</span>
+								{% endif %}
+							</td>
+							<td>
+								<a id='a-delete' href='javascript:void(0);'>删除</a>
+							</td>
+						</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+
+				</div>
+				<div class="form-group">
+					<div class="col-md-4"></div>
+					<div class="col-md-8">
+						<button type="submit" class="btn btn-primary">提交</button>
+						<a class="btn btn-success" href="javascript:void(0)" id="btn-add-sku">增加SKU</a>
+					</div>
+				</div>
+			</form>
+	</div>
+	<div class="col-md-2"></div>
+</div>
+{% endblock %}
+
+{% block page_level_scripts %}
+<script type="text/javascript">
+ $('#datetime1').datepicker({
+  format: 'yyyy-mm-dd',
+        weekStart: 1,
+        autoclose: true,
+        todayBtn: 'linked',
+        language: 'zh-CN'
+ }).on('changeDate',function(ev){});
+ $('#datetime2').datepicker({
+  format: 'yyyy-mm-dd',
+        weekStart: 1,
+        autoclose: true,
+        todayBtn: 'linked',
+        language: 'zh-CN'
+ }).on('changeDate',function(ev){});
+  $('#datetime3').datepicker({
+  format: 'yyyy-mm-dd',
+        weekStart: 1,
+        autoclose: true,
+        todayBtn: 'linked',
+        language: 'zh-CN'
+ }).on('changeDate',function(ev){});
+   $('#datetime4').datepicker({
+  format: 'yyyy-mm-dd',
+        weekStart: 1,
+        autoclose: true,
+        todayBtn: 'linked',
+        language: 'zh-CN'
+ }).on('changeDate',function(ev){});
+</script>
+<script type="text/javascript">
+$(document).ready(function(){
+	$('a#btn-add-sku').click(function(){
+		$('#sku-tbody').append("<tr><td><input type='text' maxlength='30' name='sku' required='required'></td><td><span class='label label-danger'>模板未制作</span></td><td><a id='a-delete' href='javascript:void(0);'>删除</a></td></tr>");
+	});
+	$(document).on('click','#a-delete',function(){
+		$(this).parent().parent().remove();
+	});
+	$('a#clear1').click(function(){
+		$('#datetime1').val('');
+	});
+	$('a#clear2').click(function(){
+		$('#datetime2').val('');
+	});
+	$('a#clear3').click(function(){
+		$('#datetime3').val('');
+	});
+	$('a#clear4').click(function(){
+		$('#datetime4').val('');
+	});
+});
+</script>
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends 'base_proj.html' %}
+
+{% block page_title %}领取任务{% endblock %}
+
+{% block content_title %}领取任务{% endblock %}
+
+{% block main_content %}
+<div class="row">
+	<form action="/workflow/handle_task_asign.html" method="post" role="form" class="form-horizontal">
+		<table class="table table-condensed">
+			<caption>待领取任务的SKU</caption>
+			<thead>
+				<th></th>
+				<th>SKU</th>
+				<th>负责人</th>
+				<!--<th>操作</th>-->
+			</thead>
+			<tbody>
+				{% for item in items_to_tasks %}
+				<tr>
+					<td><input type="checkbox" name="task" value="{{item.id}}"></td>
+					<td>{{item}}</td>
+					<!--<td>
+						<button class="btn btn-primary btn-xs">领取</button>
+					</td>-->
+					<td>None</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		<div class="button-group">
+				<p style="text-align:center;"><button class="btn btn-primary" type="submit">领取</button></p>
+		</div>
+	</form>
+</div>
+<div class="row">
+	<div style="width:100%;text-align:center;">
+		<ul class="pagination">
+			{% if items_to_tasks.has_previous %}
+			<li><a class='paginator' title='上一页' href='page={{ items_to_tasks.previous_page_number }}'><span>&lt;&lt;</span></a>
+			</li>
+			{% endif %}
+			{% for page in items_to_tasks.paginator.page_range %}
+				{% if page == items_to_tasks.number %}
+				<li><a  class="active" href="javascript:void(0);">{{ page }}</a></li>
+				{% else %}
+				<li><a href="page={{ page }}">{{ page }}</a></li>
+				{% endif %}
+			{% endfor %}
+			{% if items_to_tasks.has_next %}
+			<li><a href="page={{ items_to_tasks.next_page_number }}">&raquo;</a></li>
+			{% endif %}
+		</ul>
+	</div>
+</div>
+{% endblock %}
+
+{% block page_level_scripts %}
+{% endblock %}
+
